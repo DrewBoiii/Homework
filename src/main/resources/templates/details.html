@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
     <title>Car Sales</title>
 </head>
 <body>
@@ -12,7 +13,33 @@
 
 <nav></nav>
 
-<main></main>
+<main>
+    <article>
+        <span>Brand: </span>
+        <span th:text="${car.brand}"></span>
+        <br>
+
+        <span>Model: </span>
+        <span th:text="${car.model}"></span>
+        <br>
+
+        <span>Build year: </span>
+        <span th:text="${car.build}"></span>
+        <br>
+
+        <span>Kilometers: </span>
+        <span th:text="${car.kilometers}"></span>
+        <br>
+
+        <div>
+            <a th:href="@{/cars/} + ${car.id} + @{/update}">Update</a>
+        </div>
+
+        <div>
+            <a th:href="@{/cars/editor/delete/} + ${car.id}">Remove</a>
+        </div>
+    </article>
+</main>
 
 <footer></footer>
 
