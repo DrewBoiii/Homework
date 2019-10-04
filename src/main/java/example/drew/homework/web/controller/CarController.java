@@ -5,6 +5,7 @@ import example.drew.homework.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -40,13 +41,14 @@ public class CarController {
     }
 
     @PostMapping("/editor/submit")
-    public String submitCar(@ModelAttribute Car car){
+    public String submitCar(@ModelAttribute Car car, BindingResult result){
         carService.submitCar(car);
 
         return "redirect:../";
     }
 
-    @DeleteMapping("/editor/delete/{car_id}")
+//    @DeleteMapping("/editor/delete/{car_id}")
+    @RequestMapping("/editor/delete/{car_id}")
     public String deleteCarById(@PathVariable("car_id") Long id){
         carService.deleteCarById(id);
 

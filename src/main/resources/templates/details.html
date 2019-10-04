@@ -11,7 +11,14 @@
     <h1>Details</h1>
 </header>
 
-<nav></nav>
+<nav>
+    <ul>
+        <li><a th:href="@{/home}">Home</a></li>
+        <li><a th:href="@{/cars/editor}">Editor</a></li>
+        <li><a th:href="@{/cars}">Cars</a></li>
+        <li><a th:href="@{/cars/} + ${car_id} + @{/details}">Details</a></li>
+    </ul>
+</nav>
 
 <main>
     <article>
@@ -32,11 +39,11 @@
         <br>
 
         <div>
-            <a th:href="@{/cars/} + ${car.id} + @{/update}">Update</a>
+            <a th:href="@{/cars/} + ${car_id} + @{/update}">Update</a>
         </div>
 
         <div>
-            <a th:href="@{/cars/editor/delete/} + ${car.id}">Remove</a>
+            <a th:href="@{/cars/editor/delete/} + ${car_id}">Remove</a>
         </div>
     </article>
 </main>
