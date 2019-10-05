@@ -65,12 +65,15 @@ public class CarServiceImpl implements CarService {
 
             carRepository.delete(removedCar);
         }
-
-        log.info("There is no car to remove");
     }
 
     @Override
     public void updateCarById(Long id) {
         // TODO: 03.10.2019 update
+    }
+
+    @Override
+    public List<Car> getCarsByBrand(String brand) {
+        return carRepository.findCarsByBrand(brand);
     }
 }

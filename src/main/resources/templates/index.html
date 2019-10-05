@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <link th:href="@{/css/styles.css}" rel="stylesheet">
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+    <script th:src="@{js/index.js}"></script>
     <title>Car Sales</title>
 </head>
 <body>
@@ -20,7 +25,31 @@
     </ul>
 </nav>
 
-<main></main>
+<main>
+
+    <div class="starter-template">
+        <h1>Spring Boot AJAX Example</h1>
+
+        <div id="feedback"></div>
+
+        <form id="search-form">
+
+            <div>
+                <label for="brand">Car brand</label>
+                <div>
+                    <input type="text" id="brand" autofocus>
+                </div>
+            </div>
+
+            <div>
+                <button type="submit" id="bth-search">Search</button>
+            </div>
+
+        </form>
+
+    </div>
+
+</main>
 
 <footer></footer>
 

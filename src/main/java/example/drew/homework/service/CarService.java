@@ -13,4 +13,6 @@ public interface CarService {
     void deleteCarById(Long id);
     void updateCarById(Long id);
 
+    List<Car> getCarsByBrand(String brand);
+
 }
