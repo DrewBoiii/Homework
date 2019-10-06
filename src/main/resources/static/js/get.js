@@ -21,6 +21,7 @@ GET: $(document).ready(
                                 var user = "Brand  "
                                     + car.brand
                                     + " " + car.model
+                                    + " " + car.build
                                     + "<br>";
                                 $('#getResultDiv .list-group').append(
                                     user)

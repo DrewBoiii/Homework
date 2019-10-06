@@ -23,8 +23,8 @@
 <nav>
     <ul>
         <li><a th:href="@{/home}">Home</a></li>
-        <li><a th:href="@{/cars/editor}">Editor</a></li>
-        <li><a th:href="@{/cars}">Cars</a></li>
+        <li><a th:href="@{/editor}">Editor</a></li>
+        <li><a id="getCars" th:href="@{/cars}">Cars</a></li>
         <!--<li><a th:href="@{/cars/} + ${car_id} + @{/details}">Details</a></li>-->
     </ul>
 </nav>
@@ -55,39 +55,40 @@
 
     <div>
         <h2>Stacked form</h2>
-        <form id="carForm">
-            <div class="form-group">
-                <label for="brand">Brand:</label>
-                <input type="text" class="form-control" id="brand" placeholder="Brand" name="brand">
-            </div>
+        <!--<form id="carForm">-->
+            <!--<div class="form-group">-->
+                <!--<label for="brand">Brand:</label>-->
+                <!--<input type="text" class="form-control" id="brand" placeholder="Brand" name="brand">-->
+            <!--</div>-->
 
-            <div class="form-group">
-                <label for="model">Model:</label>
-                <input type="text" class="form-control" id="model" placeholder="Model" name="model">
-            </div>
+            <!--<div class="form-group">-->
+                <!--<label for="model">Model:</label>-->
+                <!--<input type="text" class="form-control" id="model" placeholder="Model" name="model">-->
+            <!--</div>-->
 
-            <div class="form-group">
-                <label for="build">Build year:</label>
-                <input type="text" class="form-control" id="build" placeholder="Build year" name="build">
-            </div>
+            <!--<div class="form-group">-->
+                <!--<label for="build">Build year:</label>-->
+                <!--<input type="text" class="form-control" id="build" placeholder="Build year" name="build">-->
+            <!--</div>-->
 
-            <div class="form-group">
-                <label for="kilometers">Kilometers:</label>
-                <input type="text" class="form-control" id="kilometers" placeholder="Kilometers" name="kilometers">
-            </div>
+            <!--<div class="form-group">-->
+                <!--<label for="kilometers">Kilometers:</label>-->
+                <!--<input type="text" class="form-control" id="kilometers" placeholder="Kilometers" name="kilometers">-->
+            <!--</div>-->
 
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" name="remember">
-                    Remember me
-                </label>
-            </div>
+            <!--<div class="form-group form-check">-->
+                <!--<label class="form-check-label">-->
+                    <!--<input class="form-check-input" type="checkbox" name="remember">-->
+                    <!--Remember me-->
+                <!--</label>-->
+            <!--</div>-->
 
-            <button type="submit">Save</button>
-        </form>
+            <!--<button type="submit">Save</button>-->
+        <!--</form>-->
         <br />
         <div>
-            <button id="getCars" type="button">Get cars</button>
+            <!--<button id="getCars" type="button">Get cars</button>-->
+            <!--<a id="getCars" th:href="@{/cars}">get cars, now!</a>-->
             <div id="getResultDiv" style="padding: 20px 10px 20px 50px">
                 <ul class="list-group">
                 </ul>

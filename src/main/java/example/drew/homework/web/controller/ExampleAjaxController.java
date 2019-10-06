@@ -23,19 +23,19 @@ public class ExampleAjaxController {
         this.carService = carService;
     }
 
-    @PostMapping("/saveCar")
-    public ResponseEntity<Object> saveCar(@RequestBody Car car){
-        carService.submitCar(car);
-        CarResponse<Car> response = new CarResponse<>("success", car);
+//    @PostMapping("/saveCar")
+//    public ResponseEntity<Object> saveCar(@RequestBody Car car){
+//        carService.submitCar(car);
+//        CarResponse<Car> response = new CarResponse<>("success", car);
+//
+//        return new ResponseEntity<>(response, HttpStatus.OK);
+//    }
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    @GetMapping("/getCars")
-    public ResponseEntity<Object> getCars(){
-        CarResponse<List<Car>> response = new CarResponse<>("success", carService.getCars());
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
+//    @GetMapping("/getCars")
+//    public ResponseEntity<Object> getCars(){
+//        CarResponse<List<Car>> response = new CarResponse<>("success", carService.getCars());
+//
+//        return new ResponseEntity<>(response, HttpStatus.OK);
+//    }
 
 }

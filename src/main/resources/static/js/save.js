@@ -22,7 +22,7 @@ $(document).ready(
             $.ajax({
                 type : "POST",
                 contentType : "application/json",
-                url : "saveCar",
+                url : "submit",
                 data : JSON.stringify(formData),
                 dataType : 'json',
                 success : function(result) {

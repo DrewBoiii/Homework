@@ -2,14 +2,15 @@ package example.drew.homework.web.controller;
 
 import example.drew.homework.persistence.model.Car;
 import example.drew.homework.service.CarService;
+import example.drew.homework.util.CarResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/cars")
+import java.util.List;
+
+@RestController
 public class CarController {
 
     private CarService carService;
@@ -19,6 +20,23 @@ public class CarController {
         this.carService = carService;
     }
 
+    @PostMapping("/submit")
+    public ResponseEntity<Object> saveCar(@RequestBody Car car){
+        carService.submitCar(car);
+
+        CarResponse<Car> response = new CarResponse<>("success", car);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/getCars")
+    public ResponseEntity<Object> getCars(){
+        CarResponse<List<Car>> response = new CarResponse<>("success", carService.getCars());
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    /*
     @GetMapping
     public String getCarsPage(Model model){
         model.addAttribute("cars", carService.getCars());
@@ -60,5 +78,6 @@ public class CarController {
         // TODO: 03.10.2019 update database
         return "redirect:/cars/{car_id}/details";
     }
+    */
 
 }
