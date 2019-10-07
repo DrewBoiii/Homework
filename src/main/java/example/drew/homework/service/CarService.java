@@ -11,7 +11,7 @@ public interface CarService {
     Car getCarById(Long id);
     void submitCar(Car car);
     void deleteCarById(Long id);
-    void updateCarById(Long id);
+    Car updateCar(Car car);
 
     List<Car> getCarsByBrand(String brand);
 

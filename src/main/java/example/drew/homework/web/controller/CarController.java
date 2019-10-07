@@ -46,48 +46,13 @@ public class CarController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    /*
-    @GetMapping
-    public String getCarsPage(Model model){
-        model.addAttribute("cars", carService.getCars());
+    @PostMapping("/check")
+    public ResponseEntity<Object> updateCar(@RequestBody Car car){
+        Car updatedCar = carService.updateCar(car);
 
-        return "cars";
+        CarResponse<Car> response = new CarResponse<>("success", updatedCar);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
-    @GetMapping("/editor")
-    public String getEditorPage(Model model){
-        model.addAttribute("car", new Car());
-
-        return "editor";
-    }
-
-    @GetMapping("/{car_id}/details")
-    public String getCarById(@PathVariable("car_id") Long id, Model model){
-        model.addAttribute("car", carService.getCarById(id));
-
-        return "details";
-    }
-
-    @PostMapping("/editor/submit")
-    public String submitCar(@ModelAttribute Car car, BindingResult result){
-        carService.submitCar(car);
-
-        return "redirect:../";
-    }
-
-//    @DeleteMapping("/editor/delete/{car_id}")
-    @RequestMapping("/editor/delete/{car_id}")
-    public String deleteCarById(@PathVariable("car_id") Long id){
-        carService.deleteCarById(id);
-
-        return "redirect:/cars";
-    }
-
-    @PutMapping("/{car_id}/update")
-    public String updateCarById(@PathVariable("car_id") Long id){
-        // TODO: 03.10.2019 update database
-        return "redirect:/cars/{car_id}/details";
-    }
-    */
 
 }

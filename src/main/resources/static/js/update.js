@@ -3,10 +3,10 @@ $(document).ready(
 
         $("#carForm").submit(function(event) {
             event.preventDefault();
-            ajaxPost();
+            ajaxUpdate();
         });
 
-        function ajaxPost() {
+        function ajaxUpdate() {
 
             var formData = {
                 brand : $("#brand").val(),
@@ -18,18 +18,18 @@ $(document).ready(
             $.ajax({
                 type : "POST",
                 contentType : "application/json",
-                url : "submit",
+                url : "check",
                 data : JSON.stringify(formData),
                 dataType : 'json',
-                success : function(result) {
-                    if (result.status === "success") {
+                success : function(response) {
+                    if (response.status === "success") {
                         $("#postResultDiv").html(
-                            "" + result.data.brand + " " + result.data.model
-                            + " was successfully saved!" + "<br>" + "</p>");
+                            "" + response.data.brand + " " + response.data.model
+                            + "The car was successfully updated!" + "<br>" + "</p>");
                     } else {
                         $("#postResultDiv").html("<strong>Error</strong>");
                     }
-                    console.log(result);
+                    console.log(response);
                 },
                 error : function(e) {
                     alert("Error!");

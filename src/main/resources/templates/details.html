@@ -43,7 +43,8 @@
         <br>
 
         <div>
-            <a th:href="@{/cars/} + ${car_id} + @{/update}">Update</a>
+            <a th:href="@{/editor/} + ${car.id} + @{/update}">Update</a>
+            <!--<button th:href="@{/editor/} + ${car.id} + @{/update}">Update</button>-->
         </div>
 
         <div>

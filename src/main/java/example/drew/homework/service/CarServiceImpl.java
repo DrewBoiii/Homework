@@ -67,9 +67,21 @@ public class CarServiceImpl implements CarService {
         }
     }
 
+    // TODO: 08.10.2019 redo extremely idiot impl
     @Override
-    public void updateCarById(Long id) {
-        // TODO: 03.10.2019 update
+    public Car updateCar(Car car) {
+        Car updatedCar = new Car();
+        if(carRepository.existsById(car.getId()) && carRepository.findById(car.getId()).isPresent()){
+            updatedCar = car;
+
+            log.info("Updated car is " + updatedCar.toString());
+
+            carRepository.save(updatedCar);
+
+            return updatedCar;
+        }
+
+        return updatedCar;
     }
 
     @Override

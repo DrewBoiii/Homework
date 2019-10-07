@@ -36,7 +36,16 @@ public class MainController {
     }
 
     @GetMapping("/editor")
-    public String getEditorPage(){
+    public String getEditorPage(Model model){
+        model.addAttribute("car", new Car());
+
+        return "editor";
+    }
+
+    @GetMapping("/editor/{car_id}/update")
+    public String getEditorToUpdate(@PathVariable("car_id") Long id, Model model){
+        model.addAttribute("car", carService.getCarById(id));
+
         return "editor";
     }
 

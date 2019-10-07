@@ -7,7 +7,8 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"
             integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
             crossorigin="anonymous"></script>
-    <script th:src="@{js/save.js}"></script>
+    <!--<script th:src="@{js/save.js}"></script>-->
+    <script th:href="@{/../../../js/update.js}"></script>
 
     <title>Car Sales</title>
 </head>
@@ -34,22 +35,22 @@
         <form id="carForm">
             <div class="form-group">
                 <label for="brand">Brand:</label>
-                <input type="text" class="form-control" id="brand" placeholder="Skoda" name="brand">
+                <input type="text" class="form-control" id="brand" placeholder="Skoda" name="brand" th:value="${car.brand}">
             </div>
 
             <div class="form-group">
                 <label for="model">Model:</label>
-                <input type="text" class="form-control" id="model" placeholder="Rapid" name="model">
+                <input type="text" class="form-control" id="model" placeholder="Rapid" name="model"  th:value="${car.model}">
             </div>
 
             <div class="form-group">
                 <label for="build">Build year:</label>
-                <input type="text" class="form-control" id="build" placeholder="2018" name="build">
+                <input type="text" class="form-control" id="build" placeholder="2018" name="build"  th:value="${car.build}">
             </div>
 
             <div class="form-group">
                 <label for="kilometers">Kilometers:</label>
-                <input type="text" class="form-control" id="kilometers" placeholder="1233" name="kilometers">
+                <input type="text" class="form-control" id="kilometers" placeholder="1233" name="kilometers"  th:value="${car.kilometers}">
             </div>
 
             <button type="submit">Publish</button>
