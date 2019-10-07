@@ -1,30 +1,28 @@
-GET: $(document).ready(
+$(document).ready(
     function() {
 
-        // GET REQUEST
         $("#getCars").click(function(event) {
             event.preventDefault();
             ajaxGet();
         });
 
-        // DO GET
         function ajaxGet() {
             $.ajax({
                 type : "GET",
-                url : "getCars",
+                url : "cars/all",
                 success : function(result) {
                     if (result.status === "success") {
                         $('#getResultDiv ul').empty();
-                        var custList = "";
+                        // var custList = "";
                         $.each(result.data,
                             function(i, car) {
-                                var user = "Brand  "
-                                    + car.brand
-                                    + " " + car.model
-                                    + " " + car.build
-                                    + "<br>";
-                                $('#getResultDiv .list-group').append(
-                                    user)
+                                var thisCar = i + ": "
+                                    + car.brand + " "
+                                    + car.model + "<br>"
+                                    + car.build + "<br>"
+                                    + car.kilometers + "km<br><hr>";
+
+                                $('#getResultDiv .list-group').append(thisCar)
                             });
                         console.log("Success: ", result);
                     } else {

@@ -29,9 +29,19 @@ public class CarController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/getCars")
+    @GetMapping("/cars/all")
     public ResponseEntity<Object> getCars(){
         CarResponse<List<Car>> response = new CarResponse<>("success", carService.getCars());
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/cars/{car_id}/delete")
+    public ResponseEntity<Object> deleteCar(@PathVariable("car_id") Long id){
+        Car removedCar = carService.getCarById(id);
+        carService.deleteCarById(id);
+
+        CarResponse<Car> response = new CarResponse<>("success", removedCar);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

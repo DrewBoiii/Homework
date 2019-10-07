@@ -1,16 +1,13 @@
 $(document).ready(
     function() {
 
-        // SUBMIT FORM
         $("#carForm").submit(function(event) {
-            // Prevent the form from submitting via the browser.
             event.preventDefault();
             ajaxPost();
         });
 
         function ajaxPost() {
 
-            // PREPARE FORM DATA
             var formData = {
                 brand : $("#brand").val(),
                 model : $("#model").val(),
@@ -18,7 +15,6 @@ $(document).ready(
                 kilometers : $("#kilometers").val()
             };
 
-            // DO POST
             $.ajax({
                 type : "POST",
                 contentType : "application/json",

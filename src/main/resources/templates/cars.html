@@ -16,19 +16,18 @@
         <li><a th:href="@{/home}">Home</a></li>
         <li><a th:href="@{/editor}">Editor</a></li>
         <li><a th:href="@{/cars}">Cars</a></li>
-        <!--<li><a th:href="@{/cars/} + ${car_id} + @{/details}">Details</a></li>-->
     </ul>
 </nav>
 
 <main>
-    <!--<div th:each="car : ${cars}">-->
-        <!--<p th:text="${car.brand}">brand</p>-->
-        <!--<p th:text="${car.model}">model</p>-->
-        <!--<p th:text="${car.build}">build year</p>-->
-        <!--<p th:text="${car.kilometers}">kilometers</p>-->
-        <!--<p><a th:href="@{/cars/} + ${car.id} + @{/details}">details</a></p>-->
-        <!--<hr>-->
-    <!--</div>-->
+    <div th:each="car : ${cars}">
+        <p th:text="${car.brand}">brand</p>
+        <p th:text="${car.model}">model</p>
+        <p th:text="${car.build}">build year</p>
+        <p th:text="${car.kilometers}">kilometers</p>
+        <p><a th:href="@{/cars/} + ${car.id} + @{/details}">details</a></p>
+        <hr>
+    </div>
 </main>
 
 <footer></footer>

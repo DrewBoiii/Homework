@@ -9,7 +9,6 @@
             integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
             crossorigin="anonymous"></script>
     <script th:src="@{js/index.js}"></script>
-    <script th:src="@{js/save.js}"></script>
     <script th:src="@{js/get.js}"></script>
 
     <title>Car Sales</title>
@@ -24,75 +23,19 @@
     <ul>
         <li><a th:href="@{/home}">Home</a></li>
         <li><a th:href="@{/editor}">Editor</a></li>
-        <li><a id="getCars" th:href="@{/cars}">Cars</a></li>
-        <!--<li><a th:href="@{/cars/} + ${car_id} + @{/details}">Details</a></li>-->
+        <li><a th:href="@{/cars}">Cars</a></li>
     </ul>
 </nav>
 
 <main>
 
+    <div id="feedback"></div>
     <div>
-        <h1>Spring Boot AJAX Example</h1>
+        <button id="getCars">get cars, now!!!</button>
 
-        <div id="feedback"></div>
-
-        <!--<form id="search-form">-->
-
-            <!--<div>-->
-                <!--<label for="brand">Car brand</label>-->
-                <!--<div>-->
-                    <!--<input type="text" id="brand" autofocus>-->
-                <!--</div>-->
-            <!--</div>-->
-
-            <!--<div>-->
-                <!--<button type="submit" id="bth-search">Search</button>-->
-            <!--</div>-->
-
-        <!--</form>-->
-
-    </div>
-
-    <div>
-        <h2>Stacked form</h2>
-        <!--<form id="carForm">-->
-            <!--<div class="form-group">-->
-                <!--<label for="brand">Brand:</label>-->
-                <!--<input type="text" class="form-control" id="brand" placeholder="Brand" name="brand">-->
-            <!--</div>-->
-
-            <!--<div class="form-group">-->
-                <!--<label for="model">Model:</label>-->
-                <!--<input type="text" class="form-control" id="model" placeholder="Model" name="model">-->
-            <!--</div>-->
-
-            <!--<div class="form-group">-->
-                <!--<label for="build">Build year:</label>-->
-                <!--<input type="text" class="form-control" id="build" placeholder="Build year" name="build">-->
-            <!--</div>-->
-
-            <!--<div class="form-group">-->
-                <!--<label for="kilometers">Kilometers:</label>-->
-                <!--<input type="text" class="form-control" id="kilometers" placeholder="Kilometers" name="kilometers">-->
-            <!--</div>-->
-
-            <!--<div class="form-group form-check">-->
-                <!--<label class="form-check-label">-->
-                    <!--<input class="form-check-input" type="checkbox" name="remember">-->
-                    <!--Remember me-->
-                <!--</label>-->
-            <!--</div>-->
-
-            <!--<button type="submit">Save</button>-->
-        <!--</form>-->
-        <br />
-        <div>
-            <!--<button id="getCars" type="button">Get cars</button>-->
-            <!--<a id="getCars" th:href="@{/cars}">get cars, now!</a>-->
-            <div id="getResultDiv" style="padding: 20px 10px 20px 50px">
-                <ul class="list-group">
-                </ul>
-            </div>
+        <div id="getResultDiv">
+            <ul class="list-group">
+            </ul>
         </div>
     </div>
 

@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <link th:href="@{/css/styles.css}" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+    <script th:src="@{/../../../js/delete.js}"></script>
     <title>Car Sales</title>
 </head>
 <body>
@@ -16,7 +21,6 @@
         <li><a th:href="@{/home}">Home</a></li>
         <li><a th:href="@{/editor}">Editor</a></li>
         <li><a th:href="@{/cars}">Cars</a></li>
-        <!--<li><a th:href="@{/cars/} + ${car_id} + @{/details}">Details</a></li>-->
     </ul>
 </nav>
 
@@ -43,7 +47,12 @@
         </div>
 
         <div>
-            <a th:href="@{/cars/editor/delete/} + ${car_id}">Remove</a>
+            <!--<a th:href="@{/cars/editor/delete/} + ${car_id}">Remove</a>-->
+            <button id="deleteCar">Remove</button>
+        </div>
+
+        <div id="getResultDiv">
+
         </div>
     </article>
 </main>

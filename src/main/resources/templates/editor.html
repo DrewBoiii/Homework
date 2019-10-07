@@ -22,37 +22,12 @@
         <li><a th:href="@{/home}">Home</a></li>
         <li><a th:href="@{/editor}">Editor</a></li>
         <li><a th:href="@{/cars}">Cars</a></li>
-        <!--<li><a th:href="@{/cars/} + ${car_id} + @{/details}">Details</a></li>-->
     </ul>
 </nav>
 
 <main>
 
     <div>
-
-        <!--<form action="#" th:action="@{/cars/editor/submit}" th:object="${car}" method="post">-->
-            <!--<div>-->
-                <!--<label for="brand">Brand</label>-->
-                <!--<input id = "brand" type="text" placeholder="Volkswagen" autofocus th:field="*{brand}">-->
-            <!--</div>-->
-
-            <!--<div>-->
-                <!--<label for="model">Model</label>-->
-                <!--<input id = "model" type="text" placeholder="Beetle" th:field="*{model}">-->
-            <!--</div>-->
-
-            <!--<div>-->
-                <!--<label for="build">Build year</label>-->
-                <!--<input id = "build" type="text" placeholder="1975" th:field="*{build}">-->
-            <!--</div>-->
-
-            <!--<div>-->
-                <!--<label for="kilometers">Kilometers</label>-->
-                <!--<input id = "kilometers" type="text" placeholder="123000" th:field="*{kilometers}">-->
-            <!--</div>-->
-
-            <!--<button type="submit">Publish</button>-->
-        <!--</form>-->
 
         <div id="postResultDiv" align="center"></div>
 
@@ -75,13 +50,6 @@
             <div class="form-group">
                 <label for="kilometers">Kilometers:</label>
                 <input type="text" class="form-control" id="kilometers" placeholder="1233" name="kilometers">
-            </div>
-
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" name="remember">
-                    Remember me
-                </label>
             </div>
 
             <button type="submit">Publish</button>
