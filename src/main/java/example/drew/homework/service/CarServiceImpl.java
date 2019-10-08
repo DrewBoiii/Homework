@@ -67,21 +67,21 @@ public class CarServiceImpl implements CarService {
         }
     }
 
-    // TODO: 08.10.2019 redo extremely idiot impl
     @Override
-    public Car updateCar(Car car) {
-        Car updatedCar = new Car();
+    public void updateCar(Car car) {
+        Car oldCar;
         if(carRepository.existsById(car.getId()) && carRepository.findById(car.getId()).isPresent()){
-            updatedCar = car;
+            oldCar = carRepository.findById(car.getId()).get();
 
-            log.info("Updated car is " + updatedCar.toString());
+            oldCar.setBrand(car.getBrand());
+            oldCar.setModel(car.getModel());
+            oldCar.setBuild(car.getBuild());
+            oldCar.setKilometers(car.getKilometers());
 
-            carRepository.save(updatedCar);
+            carRepository.save(oldCar);
 
-            return updatedCar;
+            log.info("Updated car is " + oldCar.toString());
         }
-
-        return updatedCar;
     }
 
     @Override

@@ -1,7 +1,7 @@
 $(document).ready(
     function() {
 
-        $("#carForm").submit(function(event) {
+        $("#carDetailsForm").submit(function(event) {
             event.preventDefault();
             ajaxUpdate();
         });
@@ -9,27 +9,30 @@ $(document).ready(
         function ajaxUpdate() {
 
             var formData = {
+                id : $("#id").val(),
                 brand : $("#brand").val(),
                 model : $("#model").val(),
                 build : $("#build").val(),
                 kilometers : $("#kilometers").val()
             };
 
+            var carId = $("#id").val();
+
             $.ajax({
-                type : "POST",
+                type : "PUT",
                 contentType : "application/json",
-                url : "check",
+                url : "update",
                 data : JSON.stringify(formData),
                 dataType : 'json',
-                success : function(response) {
-                    if (response.status === "success") {
-                        $("#postResultDiv").html(
-                            "" + response.data.brand + " " + response.data.model
-                            + "The car was successfully updated!" + "<br>" + "</p>");
+                success : function(result) {
+                    if (result.status === "success") {
+                        $("#putResultDiv").html(
+                            "" + result.data.brand + " " + result.data.model
+                            + " was successfully updated!" + "<br>" + "</p>");
                     } else {
-                        $("#postResultDiv").html("<strong>Error</strong>");
+                        $("#putResultDiv").html("<strong>Error</strong>");
                     }
-                    console.log(response);
+                    console.log(result);
                 },
                 error : function(e) {
                     alert("Error!");

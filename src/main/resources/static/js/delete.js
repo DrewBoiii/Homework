@@ -12,23 +12,24 @@ GET: $(document).ready(
                 url : "delete",
                 success : function(result) {
                     if (result.status === "success") {
-                        $('#getResultDiv ul').empty();
+                        $('#getDeleteResultDiv ul').empty();
+
                         var thisCar = "Removed car: "
                             + result.data.brand + " "
                             + result.data.model + "<br>"
                             + result.data.build + "<br>"
                             + result.data.kilometers + "km<br><hr>";
 
-                        $('#getResultDiv').append(thisCar);
+                        $('#getDeleteResultDiv').append(thisCar);
 
                         console.log("Success: ", result);
                     } else {
-                        $("#getResultDiv").html("<strong>Error</strong>");
+                        $("#getDeleteResultDiv").html("<strong>Error</strong>");
                         console.log("Fail: ", result);
                     }
                 },
                 error : function(e) {
-                    $("#getResultDiv").html("<strong>Error</strong>");
+                    $("#getDeleteResultDiv").html("<strong>Error</strong>");
                     console.log("ERROR: ", e);
                 }
             });

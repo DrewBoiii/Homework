@@ -46,11 +46,11 @@ public class CarController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("/check")
-    public ResponseEntity<Object> updateCar(@RequestBody Car car){
-        Car updatedCar = carService.updateCar(car);
+    @PutMapping("/cars/{car_id}/update")
+    public ResponseEntity<Object> updateCar(@RequestBody Car car, @PathVariable("car_id") Long id){
+        carService.updateCar(car);
 
-        CarResponse<Car> response = new CarResponse<>("success", updatedCar);
+        CarResponse<Car> response = new CarResponse<>("success", car);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

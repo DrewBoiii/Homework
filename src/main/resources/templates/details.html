@@ -8,6 +8,7 @@
             integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
             crossorigin="anonymous"></script>
     <script th:src="@{/../../../js/delete.js}"></script>
+    <script th:src="@{/../../../js/update.js}"></script>
     <title>Car Sales</title>
 </head>
 <body>
@@ -26,33 +27,46 @@
 
 <main>
     <article>
-        <span>Brand: </span>
-        <span th:text="${car.brand}"></span>
-        <br>
+        <div id="putResultDiv" align="center"></div>
 
-        <span>Model: </span>
-        <span th:text="${car.model}"></span>
-        <br>
+        <form id="carDetailsForm">
+            <div class="form-group" hidden>
+                <label for="id">Id:</label>
+                <input type="text" class="form-control" id="id" name="brand" th:value="${car.id}">
+            </div>
 
-        <span>Build year: </span>
-        <span th:text="${car.build}"></span>
-        <br>
+            <div class="form-group">
+                <label for="brand">Brand:</label>
+                <input type="text" class="form-control" id="brand" name="brand"
+                       th:placeholder="${car.brand}" th:value="${car.brand}">
+            </div>
 
-        <span>Kilometers: </span>
-        <span th:text="${car.kilometers}"></span>
-        <br>
+            <div class="form-group">
+                <label for="model">Model:</label>
+                <input type="text" class="form-control" id="model" name="model"
+                       th:placeholder="${car.model}" th:value="${car.model}">
+            </div>
+
+            <div class="form-group">
+                <label for="build">Build year:</label>
+                <input type="text" class="form-control" id="build" name="build"
+                       th:placeholder="${car.build}" th:value="${car.build}">
+            </div>
+
+            <div class="form-group">
+                <label for="kilometers">Kilometers:</label>
+                <input type="text" class="form-control" id="kilometers" name="kilometers"
+                       th:placeholder="${car.kilometers}" th:value="${car.kilometers}">
+            </div>
+
+            <button type="submit">Update</button>
+        </form>
 
         <div>
-            <a th:href="@{/editor/} + ${car.id} + @{/update}">Update</a>
-            <!--<button th:href="@{/editor/} + ${car.id} + @{/update}">Update</button>-->
-        </div>
-
-        <div>
-            <!--<a th:href="@{/cars/editor/delete/} + ${car_id}">Remove</a>-->
             <button id="deleteCar">Remove</button>
         </div>
 
-        <div id="getResultDiv">
+        <div id="getDeleteResultDiv">
 
         </div>
     </article>

@@ -42,11 +42,4 @@ public class MainController {
         return "editor";
     }
 
-    @GetMapping("/editor/{car_id}/update")
-    public String getEditorToUpdate(@PathVariable("car_id") Long id, Model model){
-        model.addAttribute("car", carService.getCarById(id));
-
-        return "editor";
-    }
-
 }
