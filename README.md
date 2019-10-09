@@ -1,2 +1,2 @@
 # Car sales
-Service that can sold yout junk.
+Service that can sold your junk.
