@@ -47,9 +47,9 @@ public class CarController {
     }
 
     @PutMapping("/cars/{car_id}/update")
-    public ResponseEntity<Object> updateCar(@RequestBody Car car, @PathVariable("car_id") Long id){
+    public ResponseEntity<Object> updateCar(@PathVariable("car_id") Long id, @RequestBody Car car){
         carService.updateCar(car);
-
+        System.out.println(id);
         CarResponse<Car> response = new CarResponse<>("success", car);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
