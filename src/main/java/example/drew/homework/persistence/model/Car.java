@@ -13,14 +13,19 @@ public class Car implements Comparable<Car> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column
     private String brand;
 
+    @Column
     private String model;
 
+    @Column
     private Long kilometers;
 
+    @Column
     private Date build;
 
+    @Column
     private Date createdAT;
 
     @PrePersist

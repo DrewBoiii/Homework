@@ -1,6 +1,5 @@
 package example.drew.homework.web.controller;
 
-import example.drew.homework.util.AjaxResponse;
 import example.drew.homework.util.SearchCriteria;
 import example.drew.homework.persistence.model.Car;
 import example.drew.homework.service.CarService;
@@ -26,7 +25,7 @@ public class SearchController {
     @PostMapping("/api/search")
     public ResponseEntity<?> getSearchResultViaAjax(@Valid @RequestBody SearchCriteria search) {
 
-        AjaxResponse response = new AjaxResponse();
+//        AjaxResponse response = new AjaxResponse();
 
         //If error, just return a 400 bad request, along with the error message
 //        if (errors.hasErrors()) {
@@ -38,15 +37,16 @@ public class SearchController {
 
         List<Car> cars = carService.getCarsByBrand(search.getBrand());
 
-        if (cars.isEmpty()) {
-            response.setMessage("no car was found!");
-        } else {
-            response.setMessage("success");
-        }
-
-        response.setResult(cars);
-
-        return ResponseEntity.ok(response);
+//        if (cars.isEmpty()) {
+//            response.setMessage("no car was found!");
+//        } else {
+//            response.setMessage("success");
+//        }
+//
+//        response.setResult(cars);
+//
+//        return ResponseEntity.ok(response);
+        return null;
 
     }
 
