@@ -1,16 +1,20 @@
 package example.drew.homework.persistence.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode
 @Entity
 public class Car implements Comparable<Car> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
@@ -24,6 +28,10 @@ public class Car implements Comparable<Car> {
 
     @Column
     private Date build;
+
+    @Column
+    @ManyToOne(targetEntity = Car.class)
+    private User user;
 
     @Column
     private Date createdAT;
