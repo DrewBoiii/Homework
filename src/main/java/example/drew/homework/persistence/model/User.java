@@ -33,6 +33,20 @@ public class User implements UserDetails {
     @Column
     private Date createdAt;
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id",
+                    referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id",
+                    referencedColumnName = "id"
+            )
+    )
+    private Collection<Role> roles;
+
     @PrePersist
     void createdAt(){
         this.createdAt = new Date();

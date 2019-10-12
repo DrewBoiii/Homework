@@ -1,7 +1,8 @@
-package example.drew.homework.service;
+package example.drew.homework.service.model;
 
 import example.drew.homework.persistence.dao.CarRepository;
 import example.drew.homework.persistence.model.Car;
+import example.drew.homework.service.dao.CarService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

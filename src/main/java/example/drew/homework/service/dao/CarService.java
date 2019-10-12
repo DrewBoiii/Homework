@@ -1,4 +1,4 @@
-package example.drew.homework.service;
+package example.drew.homework.service.dao;
 
 import example.drew.homework.persistence.model.Car;
 

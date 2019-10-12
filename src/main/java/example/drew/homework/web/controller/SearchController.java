@@ -2,7 +2,7 @@ package example.drew.homework.web.controller;
 
 import example.drew.homework.util.SearchCriteria;
 import example.drew.homework.persistence.model.Car;
-import example.drew.homework.service.CarService;
+import example.drew.homework.service.dao.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

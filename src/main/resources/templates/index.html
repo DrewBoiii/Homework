@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
 
@@ -8,8 +9,8 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"
             integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
             crossorigin="anonymous"></script>
-    <script th:src="@{js/search.js}"></script>
-    <script th:src="@{js/get.js}"></script>
+    <script th:src="@{js/searchCars.js}"></script>
+    <script th:src="@{js/getCars.js}"></script>
 
     <title>Car Sales</title>
 </head>
@@ -24,6 +25,12 @@
         <li><a th:href="@{/home}">Home</a></li>
         <li><a th:href="@{/editor}">Editor</a></li>
         <li><a th:href="@{/cars}">Cars</a></li>
+        <li sec:authorize="isAnonymous()">
+            <a th:href="@{/login}" id="signIn">Sign in</a>
+        </li>
+        <li sec:authorize="isAuthenticated()" id="signOut">
+            <a th:href="@{/logout}">Sign out</a>
+        </li>
     </ul>
 </nav>
 

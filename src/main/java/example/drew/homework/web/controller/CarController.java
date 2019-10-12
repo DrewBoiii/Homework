@@ -1,7 +1,7 @@
 package example.drew.homework.web.controller;
 
 import example.drew.homework.persistence.model.Car;
-import example.drew.homework.service.CarService;
+import example.drew.homework.service.dao.CarService;
 import example.drew.homework.util.CarResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
