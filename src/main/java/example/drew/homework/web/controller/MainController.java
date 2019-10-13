@@ -1,7 +1,7 @@
 package example.drew.homework.web.controller;
 
-import example.drew.homework.persistence.model.Car;
 import example.drew.homework.service.dao.CarService;
+import example.drew.homework.web.dto.CarDto;
 import example.drew.homework.web.dto.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,7 +39,7 @@ public class MainController {
 
     @GetMapping("/editor")
     public String getEditorPage(Model model){
-        model.addAttribute("car", new Car());
+        model.addAttribute("car", new CarDto());
 
         return "editor";
     }

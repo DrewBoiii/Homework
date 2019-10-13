@@ -40,6 +40,12 @@ public class CarController {
     @DeleteMapping("/cars/{car_id}/delete")
     public ResponseEntity<Object> deleteCar(@PathVariable("car_id") Long id){
         Car removedCar = carService.getCarById(id);
+
+        if(isNotFoundById(id)){
+            AjaxResponse<Car> response = new AjaxResponse<>("failed", null);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+
         carService.deleteCarById(id);
 
         AjaxResponse<Car> response = new AjaxResponse<>("success", removedCar);
@@ -49,11 +55,20 @@ public class CarController {
 
     @PutMapping("/cars/{car_id}/update")
     public ResponseEntity<Object> updateCar(@PathVariable("car_id") Long id, @RequestBody CarDto carDto){
+        if(isNotFoundById(id)){
+            AjaxResponse<Car> response = new AjaxResponse<>("failed", null);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+
         carService.updateCar(carDto);
-        System.out.println(id);
+
         AjaxResponse<CarDto> response = new AjaxResponse<>("success", carDto);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    private boolean isNotFoundById(Long id){
+        return carService.getCarById(id) == null;
     }
 
 }

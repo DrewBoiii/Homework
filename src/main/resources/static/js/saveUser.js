@@ -38,7 +38,7 @@ $(document).ready(
                     console.log(result);
                 },
                 error : function(e) {
-                    alert("Error!");
+                    alert("Bad request!");
                     console.log("ERROR: ", e);
                 }
             })

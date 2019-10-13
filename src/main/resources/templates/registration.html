@@ -33,25 +33,45 @@
         <div id="registrationResultDiv"></div>
 
         <div id="registrationFormDiv">
-            <form id="registrationForm">
+            <form id="registrationForm" method="post" th:object="${user}">
                 <div>
                     <label for="username">Username</label>
-                    <input type="text" id="username">
+                    <input type="text" id="username" th:field="*{username}">
+                    <span id="usernameSpan"
+                          th:each="error: ${#fields.errors('username')}"
+                          th:text="${error}">
+                        Username validation error
+                    </span>
                 </div>
 
                 <div>
                     <label for="email">Email</label>
-                    <input type="text" id="email">
+                    <input type="text" id="email" th:field="*{email}">
+                    <span id="emailSpan"
+                          th:each="error: ${#fields.errors('email')}"
+                          th:text="${error}">
+                        Email validation error
+                    </span>
                 </div>
 
                 <div>
                     <label for="password">Password</label>
-                    <input type="password" id="password">
+                    <input type="password" id="password" th:field="*{password}">
+                    <span id="passwordSpan"
+                          th:each="error: ${#fields.errors('password')}"
+                          th:text="${error}">
+                        Password validation error
+                    </span>
                 </div>
 
                 <div>
                     <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" id="confirmPassword">
+                    <input type="password" id="confirmPassword" th:field="*{confirmPassword}">
+                    <span id="confirmPasswordSpan"
+                          th:each="error: ${#fields.errors('confirmPassword')}"
+                          th:text="${error}">
+                        Password validation error
+                    </span>
                 </div>
 
                 <button type="submit" id="signupButton">Sign up</button>
