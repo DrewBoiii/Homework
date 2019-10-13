@@ -1,7 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+    <script th:src="@{js/saveUser.js}"></script>
+
     <title>Car Sales</title>
 </head>
 <body>
@@ -10,11 +18,50 @@
     <nav></nav>
 
     <main>
-        <div>
-            <form id="registrationForm">
+        <div id="registrationResultDiv"></div>
 
+        <div id="registrationFormDiv">
+            <form id="registrationForm">
+                <div>
+                    <label for="username">Username</label>
+                    <input type="text" id="username">
+                </div>
+
+                <div>
+                    <label for="email">Email</label>
+                    <input type="text" id="email">
+                </div>
+
+                <div>
+                    <label for="password">Password</label>
+                    <input type="password" id="password">
+                </div>
+
+                <div>
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword">
+                </div>
+
+                <button type="submit" id="signupButton">Sign up</button>
             </form>
         </div>
+
+        <div id="loginFormDiv">
+            <form id="loginForm">
+                <div>
+                    <label for="loginEmail">Email</label>
+                    <input type="text" id="loginEmail">
+                </div>
+
+                <div>
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword">
+                </div>
+
+                <button type="submit" id="signinButton">Sign in</button>
+            </form>
+        </div>
+
     </main>
 
     <footer></footer>

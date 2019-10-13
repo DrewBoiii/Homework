@@ -29,9 +29,8 @@ public class Car implements Comparable<Car> {
     @Column
     private Date build;
 
-    @Column
-    @ManyToOne(targetEntity = Car.class)
-    private User user;
+    @ManyToOne
+    private User person;
 
     @Column
     private Date createdAT;

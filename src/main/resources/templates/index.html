@@ -22,11 +22,17 @@
 
 <nav>
     <ul>
-        <li><a th:href="@{/home}">Home</a></li>
-        <li><a th:href="@{/editor}">Editor</a></li>
-        <li><a th:href="@{/cars}">Cars</a></li>
+        <li>
+            <a th:href="@{/home}">Home</a>
+        </li>
+        <li>
+            <a th:href="@{/editor}">Editor</a>
+        </li>
+        <li>
+            <a th:href="@{/cars}">Cars</a>
+        </li>
         <li sec:authorize="isAnonymous()">
-            <a th:href="@{/login}" id="signIn">Sign in</a>
+            <a th:href="@{/registration}" id="signIn">Sign in</a>
         </li>
         <li sec:authorize="isAuthenticated()" id="signOut">
             <a th:href="@{/logout}">Sign out</a>

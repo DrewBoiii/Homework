@@ -2,7 +2,7 @@ package example.drew.homework.web.controller;
 
 import example.drew.homework.persistence.model.Car;
 import example.drew.homework.service.dao.CarService;
-import example.drew.homework.util.CarResponse;
+import example.drew.homework.util.AjaxResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,14 +24,14 @@ public class CarController {
     public ResponseEntity<Object> saveCar(@RequestBody Car car){
         carService.submitCar(car);
 
-        CarResponse<Car> response = new CarResponse<>("success", car);
+        AjaxResponse<Car> response = new AjaxResponse<>("success", car);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/cars/all")
     public ResponseEntity<Object> getCars(){
-        CarResponse<List<Car>> response = new CarResponse<>("success", carService.getCars());
+        AjaxResponse<List<Car>> response = new AjaxResponse<>("success", carService.getCars());
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -41,7 +41,7 @@ public class CarController {
         Car removedCar = carService.getCarById(id);
         carService.deleteCarById(id);
 
-        CarResponse<Car> response = new CarResponse<>("success", removedCar);
+        AjaxResponse<Car> response = new AjaxResponse<>("success", removedCar);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -50,7 +50,7 @@ public class CarController {
     public ResponseEntity<Object> updateCar(@PathVariable("car_id") Long id, @RequestBody Car car){
         carService.updateCar(car);
         System.out.println(id);
-        CarResponse<Car> response = new CarResponse<>("success", car);
+        AjaxResponse<Car> response = new AjaxResponse<>("success", car);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

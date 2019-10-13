@@ -5,9 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class CarResponse<T> {
+@AllArgsConstructor
+public class AjaxResponse<T> {
 
     private String status;
     private T data;
