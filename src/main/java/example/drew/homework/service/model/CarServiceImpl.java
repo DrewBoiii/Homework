@@ -3,6 +3,7 @@ package example.drew.homework.service.model;
 import example.drew.homework.persistence.dao.CarRepository;
 import example.drew.homework.persistence.model.Car;
 import example.drew.homework.service.dao.CarService;
+import example.drew.homework.web.dto.CarDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,8 +51,10 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void submitCar(Car car) {
-        Car savedCar = carRepository.save(car);
+    public void submitCar(CarDto carDto) {
+        Car savedCar = getInitializedCar(carDto);
+
+        carRepository.save(savedCar);
 
         log.info("Saved car is " + savedCar.toString());
     }
@@ -69,15 +72,17 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void updateCar(Car car) {
+    public void updateCar(CarDto carDto) {
+        Car newCar = getInitializedCar(carDto);
         Car oldCar;
-        if(carRepository.existsById(car.getId()) && carRepository.findById(car.getId()).isPresent()){
-            oldCar = carRepository.findById(car.getId()).get();
 
-            oldCar.setBrand(car.getBrand());
-            oldCar.setModel(car.getModel());
-            oldCar.setBuild(car.getBuild());
-            oldCar.setKilometers(car.getKilometers());
+        if(carRepository.existsById(newCar.getId()) && carRepository.findById(newCar.getId()).isPresent()){
+            oldCar = carRepository.findById(newCar.getId()).get();
+
+            oldCar.setBrand(newCar.getBrand());
+            oldCar.setModel(newCar.getModel());
+            oldCar.setBuild(newCar.getBuild());
+            oldCar.setKilometers(newCar.getKilometers());
 
             carRepository.save(oldCar);
 
@@ -88,5 +93,16 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<Car> getCarsByBrand(String brand) {
         return carRepository.findCarsByBrand(brand);
+    }
+
+    private Car getInitializedCar(CarDto dto){
+        Car car = new Car();
+
+        car.setBrand(dto.getBrand());
+        car.setModel(dto.getModel());
+        car.setBuild(dto.getBuild());
+        car.setKilometers(dto.getKilometers());
+
+        return car;
     }
 }

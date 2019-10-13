@@ -3,6 +3,7 @@ package example.drew.homework.web.controller;
 import example.drew.homework.persistence.model.Car;
 import example.drew.homework.service.dao.CarService;
 import example.drew.homework.util.AjaxResponse;
+import example.drew.homework.web.dto.CarDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +22,10 @@ public class CarController {
     }
 
     @PostMapping("/submit")
-    public ResponseEntity<Object> saveCar(@RequestBody Car car){
-        carService.submitCar(car);
+    public ResponseEntity<Object> saveCar(@RequestBody CarDto carDto){
+        carService.submitCar(carDto);
 
-        AjaxResponse<Car> response = new AjaxResponse<>("success", car);
+        AjaxResponse<CarDto> response = new AjaxResponse<>("success", carDto);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -47,10 +48,10 @@ public class CarController {
     }
 
     @PutMapping("/cars/{car_id}/update")
-    public ResponseEntity<Object> updateCar(@PathVariable("car_id") Long id, @RequestBody Car car){
-        carService.updateCar(car);
+    public ResponseEntity<Object> updateCar(@PathVariable("car_id") Long id, @RequestBody CarDto carDto){
+        carService.updateCar(carDto);
         System.out.println(id);
-        AjaxResponse<Car> response = new AjaxResponse<>("success", car);
+        AjaxResponse<CarDto> response = new AjaxResponse<>("success", carDto);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
