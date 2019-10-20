@@ -1,4 +1,4 @@
-package example.drew.homework.util;
+package example.drew.homework.web.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AjaxResponse<T> {
+public class AjaxResponseDto<T> {
 
     private String status;
     private T data;

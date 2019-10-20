@@ -1,6 +1,6 @@
 package example.drew.homework.web.controller;
 
-import example.drew.homework.service.dao.CarService;
+import example.drew.homework.service.CarService;
 import example.drew.homework.web.dto.CarDto;
 import example.drew.homework.web.dto.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;

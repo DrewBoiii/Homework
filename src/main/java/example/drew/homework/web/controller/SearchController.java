@@ -2,7 +2,7 @@ package example.drew.homework.web.controller;
 
 import example.drew.homework.util.SearchCriteria;
 import example.drew.homework.persistence.model.Car;
-import example.drew.homework.service.dao.CarService;
+import example.drew.homework.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +25,7 @@ public class SearchController {
     @PostMapping("/api/search")
     public ResponseEntity<?> getSearchResultViaAjax(@Valid @RequestBody SearchCriteria search) {
 
-//        AjaxResponse response = new AjaxResponse();
+//        AjaxResponseDto response = new AjaxResponseDto();
 
         //If error, just return a 400 bad request, along with the error message
 //        if (errors.hasErrors()) {

@@ -1,17 +1,15 @@
-package example.drew.homework.service.model;
+package example.drew.homework.service.impl;
 
+import example.drew.homework.exception.CarNotFoundException;
 import example.drew.homework.persistence.dao.CarRepository;
 import example.drew.homework.persistence.model.Car;
-import example.drew.homework.service.dao.CarService;
+import example.drew.homework.service.CarService;
 import example.drew.homework.web.dto.CarDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Spliterator;
-import java.util.Spliterators;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -26,6 +24,7 @@ public class CarServiceImpl implements CarService {
         this.carRepository = carRepository;
     }
 
+    // TODO: 20.10.2019 this using database through query
     @Override
     public List<Car> getCars() {
         return StreamSupport
@@ -35,19 +34,18 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Car getCarById(Long id) {
-        Car car;
-        if(carRepository.existsById(id) && carRepository.findById(id).isPresent()){
-            car = carRepository.findById(id).get();
+    public Optional<Car> getCarById(Long id) throws CarNotFoundException {
+        Optional<Car> car = carRepository.findById(id);
+        if(car.isPresent()){
 
-            log.info("Extracted car is " + car.toString());
+            log.info("Extracted car is " + car.get().toString());
 
             return car;
         }
 
         log.info("Extracted car is null");
 
-        return null;
+        throw  new CarNotFoundException();
     }
 
     @Override
@@ -61,13 +59,12 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void deleteCarById(Long id) {
-        Car removedCar;
-        if(carRepository.existsById(id) && carRepository.findById(id).isPresent()){
-            removedCar = carRepository.findById(id).get();
+        Optional<Car> removedCar = carRepository.findById(id);
+        if(removedCar.isPresent()){
 
-            log.info("Removed car is " + removedCar.toString());
+            log.info("Removed car is " + removedCar.get().toString());
 
-            carRepository.delete(removedCar);
+            carRepository.delete(removedCar.get());
         }
     }
 
@@ -76,7 +73,7 @@ public class CarServiceImpl implements CarService {
         Car newCar = getInitializedCar(carDto);
         Car oldCar;
 
-        if(carRepository.existsById(newCar.getId()) && carRepository.findById(newCar.getId()).isPresent()){
+        if(carRepository.findById(newCar.getId()).isPresent()){
             oldCar = carRepository.findById(newCar.getId()).get();
 
             oldCar.setBrand(newCar.getBrand());

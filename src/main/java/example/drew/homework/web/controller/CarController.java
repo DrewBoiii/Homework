@@ -1,8 +1,8 @@
 package example.drew.homework.web.controller;
 
 import example.drew.homework.persistence.model.Car;
-import example.drew.homework.service.dao.CarService;
-import example.drew.homework.util.AjaxResponse;
+import example.drew.homework.service.CarService;
+import example.drew.homework.web.dto.AjaxResponseDto;
 import example.drew.homework.web.dto.CarDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,14 +25,14 @@ public class CarController {
     public ResponseEntity<Object> saveCar(@RequestBody CarDto carDto){
         carService.submitCar(carDto);
 
-        AjaxResponse<CarDto> response = new AjaxResponse<>("success", carDto);
+        AjaxResponseDto<CarDto> response = new AjaxResponseDto<>("success", carDto);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/cars/all")
     public ResponseEntity<Object> getCars(){
-        AjaxResponse<List<Car>> response = new AjaxResponse<>("success", carService.getCars());
+        AjaxResponseDto<List<Car>> response = new AjaxResponseDto<>("success", carService.getCars());
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -42,13 +42,13 @@ public class CarController {
         Car removedCar = carService.getCarById(id);
 
         if(isNotFoundById(id)){
-            AjaxResponse<Car> response = new AjaxResponse<>("failed", null);
+            AjaxResponseDto<Car> response = new AjaxResponseDto<>("failed", null);
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
 
         carService.deleteCarById(id);
 
-        AjaxResponse<Car> response = new AjaxResponse<>("success", removedCar);
+        AjaxResponseDto<Car> response = new AjaxResponseDto<>("success", removedCar);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -56,13 +56,13 @@ public class CarController {
     @PutMapping("/cars/{car_id}/update")
     public ResponseEntity<Object> updateCar(@PathVariable("car_id") Long id, @RequestBody CarDto carDto){
         if(isNotFoundById(id)){
-            AjaxResponse<Car> response = new AjaxResponse<>("failed", null);
+            AjaxResponseDto<Car> response = new AjaxResponseDto<>("failed", null);
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
 
         carService.updateCar(carDto);
 
-        AjaxResponse<CarDto> response = new AjaxResponse<>("success", carDto);
+        AjaxResponseDto<CarDto> response = new AjaxResponseDto<>("success", carDto);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
