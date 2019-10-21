@@ -5,10 +5,10 @@
 
     <link th:href="@{/css/styles.css}" rel="stylesheet">
 
-    <script src="https://code.jquery.com/jquery-3.4.1.js"
-            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-            crossorigin="anonymous"></script>
-    <script th:src="@{js/saveUser.js}"></script>
+    <!--<script src="https://code.jquery.com/jquery-3.4.1.js"-->
+            <!--integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="-->
+            <!--crossorigin="anonymous"></script>-->
+    <!--<script th:src="@{js/saveUser.js}"></script>-->
 
     <title>Car Sales</title>
 </head>
@@ -30,67 +30,35 @@
     </nav>
 
     <main>
-        <div id="registrationResultDiv"></div>
+        <!--<div id="registrationResultDiv"></div>-->
+
+        <div th:if="${param.success}">
+            <div class="alert alert-info">You've successfully registered!</div>
+        </div>
 
         <div id="registrationFormDiv">
-            <form id="registrationForm" method="post" th:object="${user}">
+            <form id="registrationForm" method="post" th:action="@{/signup}" th:object="${user}">
                 <div>
                     <label for="username">Username</label>
                     <input type="text" id="username" th:field="*{username}">
-                    <span id="usernameSpan"
-                          th:each="error: ${#fields.errors('username')}"
-                          th:text="${error}">
-                        Username validation error
-                    </span>
                 </div>
 
                 <div>
                     <label for="email">Email</label>
                     <input type="text" id="email" th:field="*{email}">
-                    <span id="emailSpan"
-                          th:each="error: ${#fields.errors('email')}"
-                          th:text="${error}">
-                        Email validation error
-                    </span>
                 </div>
 
                 <div>
                     <label for="password">Password</label>
                     <input type="password" id="password" th:field="*{password}">
-                    <span id="passwordSpan"
-                          th:each="error: ${#fields.errors('password')}"
-                          th:text="${error}">
-                        Password validation error
-                    </span>
                 </div>
 
                 <div>
                     <label for="confirmPassword">Confirm Password</label>
                     <input type="password" id="confirmPassword" th:field="*{confirmPassword}">
-                    <span id="confirmPasswordSpan"
-                          th:each="error: ${#fields.errors('confirmPassword')}"
-                          th:text="${error}">
-                        Password validation error
-                    </span>
                 </div>
 
                 <button type="submit" id="signupButton">Sign up</button>
-            </form>
-        </div>
-
-        <div id="loginFormDiv">
-            <form id="loginForm">
-                <div>
-                    <label for="loginEmail">Email</label>
-                    <input type="text" id="loginEmail">
-                </div>
-
-                <div>
-                    <label for="loginPassword">Password</label>
-                    <input type="password" id="loginPassword">
-                </div>
-
-                <button type="submit" id="signinButton">Sign in</button>
             </form>
         </div>
 

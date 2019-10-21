@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
         @FieldMatch(first = "password", second = "confirmPassword", message = "The password fields must be matched")
 })
 @Data
-public class UserRegistrationDto {
+public class UserDto {
 
     @Size(min = 2, max = 30, message = "the username length should be between 2 and 30")
     @NotBlank(message = "should be blanked")

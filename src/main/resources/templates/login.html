@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+
+    <title>Title</title>
+</head>
+<body>
+
+<header>Registration</header>
+
+<nav>
+    <ul>
+        <li>
+            <a th:href="@{/home}">Home</a>
+        </li>
+        <li>
+            <a th:href="@{/editor}">Editor</a>
+        </li>
+        <li>
+            <a th:href="@{/cars}">Cars</a>
+        </li>
+    </ul>
+</nav>
+
+<main>
+    <div id="loginResultDiv"></div>
+
+    <div id="loginFormDiv">
+        <form th:action="@{/login}" method="post" id="loginForm">
+
+            <div th:if="${param.error}">
+                <div class="alert alert-danger">Invalid username or
+                    password.</div>
+            </div>
+
+            <div th:if="${param.logout}">
+                <div class="alert alert-info">You have been logged out.</div>
+            </div>
+
+            <div>
+                <label for="username">Email</label>
+                <input type="text" id="username" name="username">
+            </div>
+
+            <div>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password">
+            </div>
+
+            <button type="submit" id="signinButton">Sign in</button>
+        </form>
+
+        <br/>
+        <div class="alert alert-info">
+            <p>New here? click <a th:href="@{/registration}">this</a> to sign up!</p>
+        </div>
+    </div>
+
+</main>
+
+<footer></footer>
+
+</body>
+</html>

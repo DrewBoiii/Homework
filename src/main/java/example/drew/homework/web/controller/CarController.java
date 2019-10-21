@@ -1,13 +1,20 @@
 package example.drew.homework.web.controller;
 
 import example.drew.homework.exception.CarNotFoundException;
+import example.drew.homework.exception.UserNotFoundException;
 import example.drew.homework.persistence.model.Car;
 import example.drew.homework.service.CarService;
+import example.drew.homework.service.UserService;
 import example.drew.homework.web.dto.AjaxResponseDto;
 import example.drew.homework.web.dto.CarDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,19 +24,31 @@ import java.util.Optional;
 public class CarController {
 
     private CarService carService;
+    private UserService userService;
 
     @Autowired
-    public CarController(CarService carService) {
+    public CarController(CarService carService, UserService userService) {
         this.carService = carService;
+        this.userService = userService;
     }
 
     @PostMapping("/submit")
-    public ResponseEntity<Object> saveCar(@RequestBody CarDto carDto) {
-        carService.saveCar(carDto);
+    public ResponseEntity<Object> saveCar(@RequestBody CarDto carDto, @AuthenticationPrincipal User user) throws UserNotFoundException {
+        Optional<example.drew.homework.persistence.model.User> person = userService.findUserByUsername(user.getUsername());
 
-        AjaxResponseDto<CarDto> response = new AjaxResponseDto<>("success", carDto);
+        if(person.isPresent()) {
+            carDto.setPerson(person.get());
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+            carService.saveCar(carDto);
+
+            AjaxResponseDto<CarDto> response = new AjaxResponseDto<>("success", carDto);
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+
+        AjaxResponseDto<CarDto> response = new AjaxResponseDto<>("failed", null);
+
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/cars/all")

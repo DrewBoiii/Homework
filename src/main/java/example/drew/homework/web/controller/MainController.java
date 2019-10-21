@@ -4,7 +4,7 @@ import example.drew.homework.exception.CarNotFoundException;
 import example.drew.homework.persistence.model.Car;
 import example.drew.homework.service.CarService;
 import example.drew.homework.web.dto.CarDto;
-import example.drew.homework.web.dto.UserRegistrationDto;
+import example.drew.homework.web.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,13 +52,18 @@ public class MainController {
     }
 
     @ModelAttribute("user")
-    public UserRegistrationDto userRegistrationDto(){
-        return new UserRegistrationDto();
+    public UserDto userRegistrationDto(){
+        return new UserDto();
     }
 
     @GetMapping("/registration")
     public String getRegistrationForm(){
         return "registration";
+    }
+
+    @GetMapping("/login")
+    public String login(){
+        return "login";
     }
 
 }

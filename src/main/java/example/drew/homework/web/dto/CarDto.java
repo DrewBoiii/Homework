@@ -1,5 +1,6 @@
 package example.drew.homework.web.dto;
 
+import example.drew.homework.persistence.model.User;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -25,8 +26,10 @@ public class CarDto {
     @NotBlank(message = "should be blanked")
     private Long kilometers;
 
-//    @PastOrPresent
+    @PastOrPresent
     @NotBlank(message = "should be blanked")
     private Date build;
+
+    private User person;
 
 }

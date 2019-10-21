@@ -1,12 +1,15 @@
 package example.drew.homework.service;
 
+import example.drew.homework.exception.UserNotFoundException;
 import example.drew.homework.persistence.model.User;
-import example.drew.homework.web.dto.UserRegistrationDto;
+import example.drew.homework.web.dto.UserDto;
 
 import java.util.Optional;
 
 public interface UserService {
 
-    Optional<User> save(UserRegistrationDto userRegistrationDto);
+    Optional<User> save(UserDto userDto);
+
+    Optional<User> findUserByUsername(String username) throws UserNotFoundException;
 
 }
