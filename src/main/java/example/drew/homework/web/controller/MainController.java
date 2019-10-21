@@ -1,5 +1,7 @@
 package example.drew.homework.web.controller;
 
+import example.drew.homework.exception.CarNotFoundException;
+import example.drew.homework.persistence.model.Car;
 import example.drew.homework.service.CarService;
 import example.drew.homework.web.dto.CarDto;
 import example.drew.homework.web.dto.UserRegistrationDto;
@@ -9,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.Optional;
 
 @Controller
 public class MainController {
@@ -32,8 +36,11 @@ public class MainController {
     }
 
     @GetMapping("/cars/{car_id}/details")
-    public String getCarDetails(@PathVariable("car_id") Long id, Model model){
-        model.addAttribute("car", carService.getCarById(id));
+    public String getCarDetails(@PathVariable("car_id") Long id, Model model) throws CarNotFoundException {
+        Optional<Car> car = carService.getCarById(id);
+
+        car.ifPresent(car1 -> model.addAttribute("car", car1));
+
         return "details";
     }
 

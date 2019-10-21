@@ -11,6 +11,8 @@ import java.util.Date;
 @Data
 public class CarDto {
 
+    private Long id;
+
     @Size(min = 2, max = 50, message = "the brand length should be between 2 and 50")
     @NotBlank(message = "should be blanked")
     private String brand;

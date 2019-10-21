@@ -12,7 +12,7 @@ public interface CarService {
     List<Car> getCars();
 
     Optional<Car> getCarById(Long id) throws CarNotFoundException;
-    void submitCar(CarDto car);
+    void saveCar(CarDto car);
     void deleteCarById(Long id);
     void updateCar(CarDto car);
 

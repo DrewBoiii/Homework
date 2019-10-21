@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Slf4j
 @Service
@@ -24,43 +22,34 @@ public class CarServiceImpl implements CarService {
         this.carRepository = carRepository;
     }
 
-    // TODO: 20.10.2019 this using database through query
     @Override
     public List<Car> getCars() {
-        return StreamSupport
-                .stream(Spliterators.spliteratorUnknownSize(carRepository.findAll().iterator(), Spliterator.NONNULL), false)
-                .sorted(Comparator.reverseOrder())
-                .collect(Collectors.toList());
+        return carRepository.findCarsOrderByCreatedAT();
     }
 
     @Override
     public Optional<Car> getCarById(Long id) throws CarNotFoundException {
         Optional<Car> car = carRepository.findById(id);
-        if(car.isPresent()){
 
-            log.info("Extracted car is " + car.get().toString());
+        car.ifPresent(car1 -> log.info("Extracted car is " + car1.toString()));
 
-            return car;
-        }
-
-        log.info("Extracted car is null");
-
-        throw  new CarNotFoundException();
+        return Optional.of(car.orElseThrow(CarNotFoundException::new));
     }
 
     @Override
-    public void submitCar(CarDto carDto) {
-        Car savedCar = getInitializedCar(carDto);
+    public void saveCar(CarDto carDto) {
+        Optional<Car> savedCar = Optional.of(getInitializedCar(carDto));
 
-        carRepository.save(savedCar);
+        carRepository.save(savedCar.get());
 
-        log.info("Saved car is " + savedCar.toString());
+        log.info("Saved car is " + savedCar.get().toString());
     }
 
     @Override
     public void deleteCarById(Long id) {
         Optional<Car> removedCar = carRepository.findById(id);
-        if(removedCar.isPresent()){
+
+        if (removedCar.isPresent()) {
 
             log.info("Removed car is " + removedCar.get().toString());
 
@@ -70,20 +59,19 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void updateCar(CarDto carDto) {
-        Car newCar = getInitializedCar(carDto);
-        Car oldCar;
+        Optional<Car> newCar = Optional.of(getInitializedCar(carDto));
+        Optional<Car> oldCar = carRepository.findById(newCar.get().getId());
 
-        if(carRepository.findById(newCar.getId()).isPresent()){
-            oldCar = carRepository.findById(newCar.getId()).get();
+        if (oldCar.isPresent()) {
 
-            oldCar.setBrand(newCar.getBrand());
-            oldCar.setModel(newCar.getModel());
-            oldCar.setBuild(newCar.getBuild());
-            oldCar.setKilometers(newCar.getKilometers());
+            oldCar.get().setBrand(newCar.get().getBrand());
+            oldCar.get().setModel(newCar.get().getModel());
+            oldCar.get().setBuild(newCar.get().getBuild());
+            oldCar.get().setKilometers(newCar.get().getKilometers());
 
-            carRepository.save(oldCar);
+            carRepository.save(oldCar.get());
 
-            log.info("Updated car is " + oldCar.toString());
+            log.info("Updated car is " + oldCar.get().toString());
         }
     }
 
@@ -92,9 +80,10 @@ public class CarServiceImpl implements CarService {
         return carRepository.findCarsByBrand(brand);
     }
 
-    private Car getInitializedCar(CarDto dto){
+    private Car getInitializedCar(CarDto dto) {
         Car car = new Car();
 
+        car.setId(dto.getId());
         car.setBrand(dto.getBrand());
         car.setModel(dto.getModel());
         car.setBuild(dto.getBuild());

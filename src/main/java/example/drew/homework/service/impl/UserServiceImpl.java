@@ -29,13 +29,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> save(UserRegistrationDto dto) {
-        User user = getInitializedUser(dto);
+        Optional<User> user = Optional.of(getInitializedUser(dto));
 
-        userRepository.save(user);
+        userRepository.save(user.get());
 
-        log.info("Saved user is " + user.toString());
+        log.info("Saved user is " + user.get().toString());
 
-        return new Optional<>(user);
+        return user;
     }
 
     private User getInitializedUser(UserRegistrationDto dto){

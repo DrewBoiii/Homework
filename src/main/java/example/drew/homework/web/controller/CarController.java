@@ -1,5 +1,6 @@
 package example.drew.homework.web.controller;
 
+import example.drew.homework.exception.CarNotFoundException;
 import example.drew.homework.persistence.model.Car;
 import example.drew.homework.service.CarService;
 import example.drew.homework.web.dto.AjaxResponseDto;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class CarController {
@@ -22,8 +24,8 @@ public class CarController {
     }
 
     @PostMapping("/submit")
-    public ResponseEntity<Object> saveCar(@RequestBody CarDto carDto){
-        carService.submitCar(carDto);
+    public ResponseEntity<Object> saveCar(@RequestBody CarDto carDto) {
+        carService.saveCar(carDto);
 
         AjaxResponseDto<CarDto> response = new AjaxResponseDto<>("success", carDto);
 
@@ -31,44 +33,46 @@ public class CarController {
     }
 
     @GetMapping("/cars/all")
-    public ResponseEntity<Object> getCars(){
+    public ResponseEntity<Object> getCars() {
         AjaxResponseDto<List<Car>> response = new AjaxResponseDto<>("success", carService.getCars());
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("/cars/{car_id}/delete")
-    public ResponseEntity<Object> deleteCar(@PathVariable("car_id") Long id){
-        Car removedCar = carService.getCarById(id);
+    public ResponseEntity<Object> deleteCar(@PathVariable("car_id") Long id) throws CarNotFoundException {
+        Optional<Car> removedCar = carService.getCarById(id);
 
-        if(isNotFoundById(id)){
-            AjaxResponseDto<Car> response = new AjaxResponseDto<>("failed", null);
-            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        if (removedCar.isPresent()) {
+            carService.deleteCarById(id);
+
+            AjaxResponseDto<Car> response = new AjaxResponseDto<>("success", removedCar.get());
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
         }
 
-        carService.deleteCarById(id);
+        AjaxResponseDto<Car> response = new AjaxResponseDto<>("failed", null);
 
-        AjaxResponseDto<Car> response = new AjaxResponseDto<>("success", removedCar);
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
     @PutMapping("/cars/{car_id}/update")
-    public ResponseEntity<Object> updateCar(@PathVariable("car_id") Long id, @RequestBody CarDto carDto){
-        if(isNotFoundById(id)){
-            AjaxResponseDto<Car> response = new AjaxResponseDto<>("failed", null);
-            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    public ResponseEntity<Object> updateCar(@PathVariable("car_id") Long id, @RequestBody CarDto carDto) throws CarNotFoundException {
+        Optional<Car> updatedCar = carService.getCarById(id);
+
+        if (updatedCar.isPresent()) {
+            carDto.setId(id);
+
+            carService.updateCar(carDto);
+
+            AjaxResponseDto<CarDto> response = new AjaxResponseDto<>("success", carDto);
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
         }
 
-        carService.updateCar(carDto);
+        AjaxResponseDto<Car> response = new AjaxResponseDto<>("failed", null);
 
-        AjaxResponseDto<CarDto> response = new AjaxResponseDto<>("success", carDto);
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    private boolean isNotFoundById(Long id){
-        return carService.getCarById(id) == null;
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
 }
