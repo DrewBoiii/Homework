@@ -11,7 +11,7 @@ import java.util.Date;
 @ToString
 @EqualsAndHashCode
 @Entity
-public class Car implements Comparable<Car> {
+public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,10 +39,4 @@ public class Car implements Comparable<Car> {
     void createdAt(){
         this.createdAT = new Date();
     }
-
-    @Override
-    public int compareTo(Car o) {
-        return Long.compare(this.createdAT.getTime(), o.createdAT.getTime());
-    }
-
 }
