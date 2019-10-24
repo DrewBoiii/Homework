@@ -9,12 +9,10 @@ import example.drew.homework.util.RoleConstants;
 import example.drew.homework.web.dto.UserDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.Optional;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -59,7 +57,10 @@ public class UserServiceImpl implements UserService {
         Role role = new Role();
         role.setName(RoleConstants.ROLE_USER);
 
-        user.setRoles(Collections.singletonList(role));
+        Set<Role> roleSet = new HashSet<>();
+        roleSet.add(role);
+
+        user.setRoles(roleSet);
 
         return user;
     }
