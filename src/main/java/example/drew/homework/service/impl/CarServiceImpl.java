@@ -40,6 +40,8 @@ public class CarServiceImpl implements CarService {
     public void saveCar(CarDto carDto) {
         Optional<Car> savedCar = Optional.of(getInitializedCar(carDto));
 
+        savedCar.get().setPerson(carDto.getPerson());
+
         carRepository.save(savedCar.get());
 
         log.info("Saved car is " + savedCar.get().toString());

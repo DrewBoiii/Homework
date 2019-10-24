@@ -18,7 +18,6 @@ public class UserDto {
     private String username;
 
     @ValidEmail
-    @Size(max = 50, message = "the username length should be between 2 and 50")
     @NotBlank(message = "should be blanked")
     private String email;
 
@@ -26,6 +25,7 @@ public class UserDto {
     @NotBlank(message = "should be blanked")
     private String password;
 
+    @Size(min = 6, max = 20, message = "the password length should be between 6 and 20")
     @NotBlank(message = "should be blanked")
     private String confirmPassword;
 

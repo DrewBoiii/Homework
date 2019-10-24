@@ -25,7 +25,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/registration")
     public ResponseEntity<Object> saveUser(@Valid @ModelAttribute("user") UserDto registrationDto, Errors userBlank){
         if(userBlank.hasErrors()){
             AjaxResponseDto<User> response = new AjaxResponseDto<>("failed", null);

@@ -37,7 +37,7 @@
         </div>
 
         <div id="registrationFormDiv">
-            <form id="registrationForm" method="post" th:action="@{/signup}" th:object="${user}">
+            <form id="registrationForm" method="post" th:action="@{/registration}" th:object="${user}">
                 <div>
                     <label for="username">Username</label>
                     <input type="text" id="username" th:field="*{username}">

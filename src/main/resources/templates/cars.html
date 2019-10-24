@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <link th:href="@{/css/styles.css}" rel="stylesheet">
@@ -8,7 +9,7 @@
 <body>
 
 <header>
-    <h1>Cars</h1>
+    <h1><span sec:authentication="name"></span>'s Cars</h1>
 </header>
 
 <nav>
@@ -20,11 +21,16 @@
 </nav>
 
 <main>
+    <div th:if="${cars.isEmpty()}">
+        <p>There is no cars yet :(</p>
+    </div>
+
     <div th:each="car : ${cars}">
         <p th:text="${car.brand}">brand</p>
         <p th:text="${car.model}">model</p>
         <p th:text="${car.build}">build year</p>
         <p th:text="${car.kilometers}">kilometers</p>
+        <p th:text="${car.person.username}">person</p>
         <p><a th:href="@{/cars/} + ${car.id} + @{/details}">details</a></p>
         <hr>
     </div>
