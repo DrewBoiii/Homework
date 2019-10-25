@@ -11,6 +11,7 @@
             crossorigin="anonymous"></script>
     <script th:src="@{js/searchCars.js}"></script>
     <script th:src="@{js/getCars.js}"></script>
+    <script th:src="@{js/switchLang.js}"></script>
 
     <title>Car Sales</title>
 </head>
@@ -41,6 +42,18 @@
 </nav>
 
 <main>
+    <h1 th:text="${name}"></h1>
+
+    <h3 th:text="#{greeting.user}"></h3>
+
+    <br>
+    <span th:text="#{lang.change}"></span>:
+
+    <select id="locales">
+        <option value=""></option>
+        <option value="en" th:text="#{lang.eng}"></option>
+        <option value="ru" th:text="#{lang.ru}"></option>
+    </select>
 
     <div id="feedback"></div>
     <div>
