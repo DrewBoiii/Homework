@@ -1,0 +1,168 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/db.changelog-master.yaml
+  - changeSet:
+      id: 1
+      author: DrewBoiii
+      comment: "create table person"
+      changes:
+        - createTable:
+            tableName: person
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(256)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2
+      author: DrewBoiii
+      comment: "create table role"
+      changes:
+        - createTable:
+            tableName: role
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+                    nullable: false
+  - changeSet:
+      id: 3
+      author: DrewBoiii
+      comment: "create table car"
+      changes:
+        - createTable:
+            tableName: car
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: brand
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: model
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: kilometers
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: build
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: createdat
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: person_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 4
+      author: DrewBoiii
+      comment: "create table persons_roles"
+      changes:
+        - createTable:
+            tableName: persons_roles
+            columns:
+              - column:
+                  name: person_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 5
+      author: DrewBoiii
+      comment: "add foreign key person_id to car table"
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: person_id
+            baseTableName: car
+            constraintName: fk_car_person
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: person
+  - changeSet:
+      id: 6
+      author: DrewBoiii
+      comment: "add foreign key person_id to persons_roles table"
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: person_id
+            baseTableName: persons_roles
+            constraintName: fk_persons_roles_person
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: person
+  - changeSet:
+      id: 7
+      author: DrewBoiii
+      comment: "add foreign key role_id to persons_roles table"
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: role_id
+            baseTableName: persons_roles
+            constraintName: fk_persons_roles_role
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: role
