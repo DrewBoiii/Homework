@@ -89,4 +89,15 @@ public class MainControllerTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
+    // TODO: 26.10.2019 google how to test dynamic urls 
+//    @Test
+//    public void test() throws Exception {
+//        mockMvc.perform(MockMvcRequestBuilders.get("/cars/{car_id}/details")
+//                .accept(MediaType.TEXT_HTML).param("car_id", "1")
+//        )
+//                .andExpect(MockMvcResultMatchers.status().isOk())
+//                .andExpect(MockMvcResultMatchers.view().name("details"))
+//                .andDo(MockMvcResultHandlers.print());
+//    }
+
 }
