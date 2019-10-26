@@ -1,7 +1,9 @@
 package example.drew.homework.web.dto;
 
 import example.drew.homework.persistence.model.User;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
@@ -10,6 +12,8 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CarDto {
 
     private Long id;

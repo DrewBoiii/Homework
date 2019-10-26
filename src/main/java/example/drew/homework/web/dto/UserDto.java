@@ -2,7 +2,9 @@ package example.drew.homework.web.dto;
 
 import example.drew.homework.constraint.anotation.FieldMatch;
 import example.drew.homework.constraint.anotation.ValidEmail;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -11,6 +13,8 @@ import javax.validation.constraints.Size;
         @FieldMatch(first = "password", second = "confirmPassword", message = "The password fields must be matched")
 })
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDto {
 
     @Size(min = 2, max = 30, message = "the username length should be between 2 and 30")
