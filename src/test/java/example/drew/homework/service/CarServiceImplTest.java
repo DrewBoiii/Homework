@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.internal.verification.Times;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -90,6 +91,13 @@ public class CarServiceImplTest {
         List<Car> cars = carService.getCarsByBrand("brand");
 
         Assert.assertNotNull(cars);
+    }
+
+    @Test
+    public void getNumberOfInvocation_whenCallGetCarByBrandMethod_returnOneTime(){
+        carService.getCarsByBrand(Mockito.anyString());
+
+        Mockito.verify(carRepository, new Times(1)).findCarsByBrand(Mockito.anyString());
     }
 
 }
