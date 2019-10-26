@@ -46,7 +46,14 @@ public class MainController {
             name = person.get().getUsername();
         }
 
-        model.addAttribute("name", messageSource.getMessage("greeting.user", new String[]{name}, Locale.getDefault()));
+        model.addAttribute(
+                "name",
+                messageSource.getMessage(
+                        "greeting.user",
+                        new String[]{name},
+                        new Locale("ru", "RU")
+                )
+        );
 
         return "index";
     }
