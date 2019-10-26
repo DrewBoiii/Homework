@@ -22,7 +22,7 @@ public class MainControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void getIndexPage_whenUrlValueIsSlashHome_statusOk() throws Exception {
+    public void getIndexPage_whenAvailableUrlValueIsSlashHome_statusOk() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/home").accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("index"))
@@ -30,7 +30,23 @@ public class MainControllerTest {
     }
 
     @Test
-    public void getIndexPage_whenUrlValueIsSlash_statusOk() throws Exception {
+    public void getIndexPage_whenAvailableUrlValueIsSlashHomeArgLangEn_statusOk() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/home?lang=en").accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("index"))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    public void getIndexPage_whenAvailableUrlValueIsSlashHomeArgLangRu_statusOk() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/home?lang=ru").accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("index"))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    public void getIndexPage_whenAvailableUrlValueIsSlash_statusOk() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("index"))
@@ -38,9 +54,17 @@ public class MainControllerTest {
     }
 
     @Test
-    public void getLoginPage_whenUrlIncorrect_thenRedirectToLoginPage() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/someincorrecturl").accept(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isFound())
+    public void getRegistrationPage_whenAvailableUrl_statusOk() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/registration").accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("registration"))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    public void getLoginPage_whenAvailableUrl_statusOk() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/login").accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("login"))
                 .andDo(MockMvcResultHandlers.print());
     }
