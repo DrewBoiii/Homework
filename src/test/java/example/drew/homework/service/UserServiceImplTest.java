@@ -1,6 +1,8 @@
 package example.drew.homework.service;
 
+import example.drew.homework.exception.RoleNotFoundException;
 import example.drew.homework.exception.UserNotFoundException;
+import example.drew.homework.persistence.dao.RoleRepository;
 import example.drew.homework.persistence.dao.UserRepository;
 import example.drew.homework.persistence.model.Role;
 import example.drew.homework.persistence.model.User;
@@ -33,10 +35,13 @@ public class UserServiceImplTest {
     private UserRepository userRepository;
 
     @Mock
+    private RoleRepository roleRepository;
+
+    @Mock
     private PasswordEncoder encoder;
 
     @InjectMocks
-    private UserService userService = new UserServiceImpl(userRepository, encoder);
+    private UserService userService = new UserServiceImpl(userRepository, roleRepository, encoder);
 
     private UserDto userDto;
 
@@ -52,6 +57,8 @@ public class UserServiceImplTest {
         this.expectedUser = Optional.of(user);
 
         Mockito.when(userRepository.findUserByUsername("goyko")).thenReturn(this.expectedUser);
+
+        Mockito.when(roleRepository.findByName("ROLE_USER")).thenReturn(Optional.of(new Role(null, RoleConstants.ROLE_USER)));
     }
 
     private User getInitUser(){
@@ -75,7 +82,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void saveUser_whenCorrectUserDto_returnNotEmptyOptional() {
+    public void saveUser_whenCorrectUserDto_returnNotEmptyOptional() throws RoleNotFoundException {
         Optional<User> actualUser = userService.save(this.userDto);
 
         Assert.assertNotNull(actualUser);
