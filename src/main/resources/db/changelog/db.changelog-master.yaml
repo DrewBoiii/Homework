@@ -56,6 +56,7 @@ databaseChangeLog:
                   name: name
                   type: varchar(50)
                   constraints:
+                    unique: true
                     nullable: false
   - changeSet:
       id: 3
@@ -165,3 +166,25 @@ databaseChangeLog:
             onUpdate: RESTRICT
             referencedColumnNames: id
             referencedTableName: role
+  - changeSet:
+      id: 8
+      author: DrewBoiii
+      comment: "insert role USER into role table"
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: name
+                  value: ROLE_USER
+            tableName: role
+  - changeSet:
+      id: 9
+      author: DrewBoiii
+      comment: "insert role ADMIN into role table"
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: name
+                  value: ROLE_ADMIN
+            tableName: role

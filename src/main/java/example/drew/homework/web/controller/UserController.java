@@ -1,5 +1,6 @@
 package example.drew.homework.web.controller;
 
+import example.drew.homework.exception.RoleNotFoundException;
 import example.drew.homework.persistence.model.User;
 import example.drew.homework.service.UserService;
 import example.drew.homework.web.dto.AjaxResponseDto;
@@ -26,7 +27,7 @@ public class UserController {
     }
 
     @PostMapping("/registration")
-    public ResponseEntity<Object> saveUser(@Valid @ModelAttribute("user") UserDto registrationDto, Errors userBlank){
+    public ResponseEntity<Object> saveUser(@Valid @ModelAttribute("user") UserDto registrationDto, Errors userBlank) throws RoleNotFoundException {
         if(userBlank.hasErrors()){
             AjaxResponseDto<User> response = new AjaxResponseDto<>("failed", null);
 
