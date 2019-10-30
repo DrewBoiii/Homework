@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
 <head>
     <meta charset="UTF-8">
     <link th:href="@{/css/styles.css}" rel="stylesheet">
@@ -14,53 +17,47 @@
 </head>
 <body>
 
-<header>
-    <h1><span sec:authentication="name"></span>'s Editor</h1>
-</header>
+    <header>
+        <h1><span sec:authentication="name"></span>'s Editor</h1>
+    </header>
 
-<nav>
-    <ul>
-        <li><a th:href="@{/home}">Home</a></li>
-        <li><a th:href="@{/editor}">Editor</a></li>
-        <li><a th:href="@{/cars}">Cars</a></li>
-    </ul>
-</nav>
+    <div layout:fragment="content">
+        <main>
 
-<main>
+            <div>
 
-    <div>
+                <div id="postResultDiv" align="center"></div>
 
-        <div id="postResultDiv" align="center"></div>
+                <form id="carForm">
+                    <div class="form-group">
+                        <label for="brand">Brand:</label>
+                        <input type="text" class="form-control" id="brand" placeholder="Skoda" name="brand" th:value="${car.brand}">
+                    </div>
 
-        <form id="carForm">
-            <div class="form-group">
-                <label for="brand">Brand:</label>
-                <input type="text" class="form-control" id="brand" placeholder="Skoda" name="brand" th:value="${car.brand}">
+                    <div class="form-group">
+                        <label for="model">Model:</label>
+                        <input type="text" class="form-control" id="model" placeholder="Rapid" name="model"  th:value="${car.model}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="build">Build year:</label>
+                        <input type="text" class="form-control" id="build" placeholder="2018" name="build"  th:value="${car.build}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="kilometers">Kilometers:</label>
+                        <input type="text" class="form-control" id="kilometers" placeholder="1233" name="kilometers"  th:value="${car.kilometers}">
+                    </div>
+
+                    <button type="submit">Publish</button>
+                </form>
+
             </div>
 
-            <div class="form-group">
-                <label for="model">Model:</label>
-                <input type="text" class="form-control" id="model" placeholder="Rapid" name="model"  th:value="${car.model}">
-            </div>
-
-            <div class="form-group">
-                <label for="build">Build year:</label>
-                <input type="text" class="form-control" id="build" placeholder="2018" name="build"  th:value="${car.build}">
-            </div>
-
-            <div class="form-group">
-                <label for="kilometers">Kilometers:</label>
-                <input type="text" class="form-control" id="kilometers" placeholder="1233" name="kilometers"  th:value="${car.kilometers}">
-            </div>
-
-            <button type="submit">Publish</button>
-        </form>
-
+        </main>
     </div>
 
-</main>
-
-<footer></footer>
+    <footer></footer>
 
 </body>
 </html>

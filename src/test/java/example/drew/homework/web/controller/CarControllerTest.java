@@ -50,7 +50,7 @@ public class CarControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    // TODO: 28.10.2019 google test securing urls 
+    // TODO: 28.10.2019 google test securing urls
 
     @Before
     public void init() {

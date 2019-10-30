@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
 <head>
     <meta charset="UTF-8">
 
@@ -17,57 +19,39 @@
 </head>
 <body>
 
-<header>
-    <h1>Car Sales</h1>
-</header>
+    <header>
+        <h1>Car Sales</h1>
+    </header>
 
-<nav>
-    <ul>
-        <li>
-            <a th:href="@{/home}">Home</a>
-        </li>
-        <li>
-            <a th:href="@{/editor}">Editor</a>
-        </li>
-        <li>
-            <a th:href="@{/cars}">Cars</a>
-        </li>
-        <li sec:authorize="isAnonymous()">
-            <a th:href="@{/login}" id="signIn">Sign in</a>
-        </li>
-        <li sec:authorize="isAuthenticated()" id="signOut">
-            <a th:href="@{/logout}">Sign out</a>
-        </li>
-    </ul>
-</nav>
+    <div layout:fragment="content">
+        <main>
+            <h1 th:text="${name}"></h1>
 
-<main>
-    <h1 th:text="${name}"></h1>
+            <h3 th:text="#{greeting.user}"></h3>
 
-    <h3 th:text="#{greeting.user}"></h3>
+            <br>
+            <span th:text="#{lang.change}"></span>:
 
-    <br>
-    <span th:text="#{lang.change}"></span>:
+            <select id="locales">
+                <option value=""></option>
+                <option value="en" th:text="#{lang.eng}"></option>
+                <option value="ru" th:text="#{lang.ru}"></option>
+            </select>
 
-    <select id="locales">
-        <option value=""></option>
-        <option value="en" th:text="#{lang.eng}"></option>
-        <option value="ru" th:text="#{lang.ru}"></option>
-    </select>
+            <div id="feedback"></div>
+            <div>
+                <button id="getCars">get cars, now!!!</button>
 
-    <div id="feedback"></div>
-    <div>
-        <button id="getCars">get cars, now!!!</button>
+                <div id="getResultDiv">
+                    <ul class="list-group">
+                    </ul>
+                </div>
+            </div>
 
-        <div id="getResultDiv">
-            <ul class="list-group">
-            </ul>
-        </div>
+        </main>
     </div>
 
-</main>
-
-<footer></footer>
+    <footer></footer>
 
 </body>
 </html>

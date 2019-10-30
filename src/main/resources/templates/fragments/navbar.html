@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <div th:fragment="navbar">
+        <nav>
+            <ul>
+                <li>
+                    <a th:href="@{/home}">Home</a>
+                </li>
+                <li>
+                    <a th:href="@{/editor}">Editor</a>
+                </li>
+                <li>
+                    <a th:href="@{/cars}">Cars</a>
+                </li>
+                <li sec:authorize="isAnonymous()">
+                    <a th:href="@{/login}" id="signIn">Sign in</a>
+                </li>
+                <li sec:authorize="isAuthenticated()" id="signOut">
+                    <a th:href="@{/logout}">Sign out</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+</body>
+</html>
