@@ -59,8 +59,8 @@ public class MainController {
     }
 
     @GetMapping("/cars")
-    public String getCarsPage(Model model) {
-        model.addAttribute("cars", carService.getCars());
+    public String getCarsPage(Model model, @AuthenticationPrincipal User user) {
+        model.addAttribute("cars", carService.getCarsByUsername(user.getUsername()));
         return "cars";
     }
 

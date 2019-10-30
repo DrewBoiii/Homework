@@ -28,6 +28,11 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
+    public List<Car> getCarsByUsername(String username) {
+        return carRepository.findCarsByPerson_Username(username);
+    }
+
+    @Override
     public Optional<Car> getCarById(Long id) throws CarNotFoundException {
         Optional<Car> car = carRepository.findById(id);
 

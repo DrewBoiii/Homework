@@ -10,12 +10,12 @@ import java.util.Optional;
 public interface CarService {
 
     List<Car> getCars();
+    List<Car> getCarsByBrand(String brand);
+    List<Car> getCarsByUsername(String username);
 
     Optional<Car> getCarById(Long id) throws CarNotFoundException;
     void saveCar(CarDto car);
     void deleteCarById(Long id);
     void updateCar(CarDto car);
-
-    List<Car> getCarsByBrand(String brand);
 
 }
