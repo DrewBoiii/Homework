@@ -36,13 +36,13 @@ public class MainController {
     public String getIndexPage(Model model, @AuthenticationPrincipal User user) throws UserNotFoundException {
         Optional<example.drew.homework.persistence.model.User> person = Optional.empty();
 
-        if(user != null) {
+        if (user != null) {
             person = userService.findUserByUsername(user.getUsername());
         }
 
         String name = "Anonymous";
 
-        if(person.isPresent()) {
+        if (person.isPresent()) {
             name = person.get().getUsername();
         }
 
