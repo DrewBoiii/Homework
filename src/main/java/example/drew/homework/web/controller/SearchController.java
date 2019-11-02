@@ -34,7 +34,6 @@ public class SearchController {
 //            return ResponseEntity.badRequest().body(result);
 //
 //        }
-        
 
         List<Car> cars = carService.getCarsByBrand(search.getBrand());
 
