@@ -28,7 +28,7 @@ public class UserController {
 
     @PostMapping("/registration")
     public ResponseEntity<Object> saveUser(@Valid @ModelAttribute("user") UserDto registrationDto, Errors userBlank) throws RoleNotFoundException {
-        if(userBlank.hasErrors()){
+        if (userBlank.hasErrors()) {
             AjaxResponseDto<User> response = new AjaxResponseDto<>("failed", null);
 
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -38,7 +38,7 @@ public class UserController {
 
         AjaxResponseDto<User> response = null;
 
-        if(user.isPresent()) {
+        if (user.isPresent()) {
             response = new AjaxResponseDto<>("success", user.get());
         }
 
