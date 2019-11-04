@@ -8,7 +8,20 @@ import java.util.List;
 
 public interface CarRepository extends JpaRepository<Car, Long> {
 
-    List<Car> findCarsByBrand(String brand);
+    @Query(
+            value = "SELECT * FROM car WHERE " +
+                    "setweight(to_tsvector(brand),'A') || " +
+                    "setweight(to_tsvector(model),'B') " +
+                    "@@ plainto_tsquery( ?1 )" +
+                    "ORDER BY ts_rank(" +
+                    "setweight(to_tsvector(brand),'A') || " +
+                    "setweight(to_tsvector(model),'B'), " +
+                    "plainto_tsquery( ?1 )" +
+                    ") DESC",
+            nativeQuery = true
+    )
+    List<Car> findCarsBySearchCriteria(String searchCriteria);
+
     List<Car> findCarsByPerson_Username(String username);
 
     @Query("select c from Car c order by c.createdAT desc")

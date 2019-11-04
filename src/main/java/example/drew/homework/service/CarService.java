@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface CarService {
 
     List<Car> getCars();
-    List<Car> getCarsByBrand(String brand);
+    List<Car> getCarsBySearchCriteria(String searchCriteria);
     List<Car> getCarsByUsername(String username);
 
     Optional<Car> getCarById(Long id) throws CarNotFoundException;

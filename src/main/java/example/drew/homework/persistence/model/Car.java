@@ -1,5 +1,6 @@
 package example.drew.homework.persistence.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.Date;
 @ToString
 @EqualsAndHashCode
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Car {
 
     @Id

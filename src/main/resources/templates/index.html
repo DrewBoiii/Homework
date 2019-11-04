@@ -11,8 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"
             integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
             crossorigin="anonymous"></script>
-    <script th:src="@{js/searchCars.js}"></script>
-    <script th:src="@{js/getCars.js}"></script>
+<!--    <script th:src="@{js/getCars.js}"></script>-->
     <script th:src="@{js/switchLang.js}"></script>
 
     <title>Car Sales</title>
@@ -25,28 +24,48 @@
 
     <div layout:fragment="content">
         <main>
-            <h1 th:text="${name}"></h1>
+            <div id="message">
+                <h3 th:text="${name}">Name</h3>
+                <h5 th:text="#{greeting.user}">Greeting</h5>
+                <br>
+                <span th:text="#{lang.change}">Language</span>:
+                <select id="locales">
+                    <option value=""></option>
+                    <option value="en" th:text="#{lang.eng}">English</option>
+                    <option value="ru" th:text="#{lang.ru}">Russian</option>
+                </select>
+            </div>
 
-            <h3 th:text="#{greeting.user}"></h3>
+            <div id="search">
+                <form action="/home" method="get">
+                    <input type="text" size="50" name="search_criteria">
+                    <input type="submit" value="Search">
+                </form>
+            </div>
 
-            <br>
-            <span th:text="#{lang.change}"></span>:
+            <div th:if="${cars.isEmpty()}">
+                <h4>There is no cars yet :(</h4>
+            </div>
 
-            <select id="locales">
-                <option value=""></option>
-                <option value="en" th:text="#{lang.eng}"></option>
-                <option value="ru" th:text="#{lang.ru}"></option>
-            </select>
-
-            <div id="feedback"></div>
-            <div>
-                <button id="getCars">get cars, now!!!</button>
-
-                <div id="getResultDiv">
-                    <ul class="list-group">
-                    </ul>
+            <div th:unless="${cars.isEmpty()}">
+                <div id="cars" th:each="car : ${cars}">
+                    <p th:text="${car.brand}">brand</p>
+                    <p th:text="${car.model}">model</p>
+                    <p th:text="${car.build}">build year</p>
+                    <p th:text="${car.kilometers}">kilometers</p>
+                    <p th:text="${car.person.username}">person</p>
+                    <hr>
                 </div>
             </div>
+
+<!--            <div>-->
+<!--                <button id="getCars">get cars, now!!!</button>-->
+
+<!--                <div id="getResultDiv">-->
+<!--                    <ul class="list-group">-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
 
         </main>
     </div>

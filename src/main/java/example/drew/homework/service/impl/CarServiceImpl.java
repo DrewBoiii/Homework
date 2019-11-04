@@ -83,8 +83,8 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<Car> getCarsByBrand(String brand) {
-        return carRepository.findCarsByBrand(brand);
+    public List<Car> getCarsBySearchCriteria(String searchCriteria) {
+        return carRepository.findCarsBySearchCriteria(searchCriteria);
     }
 
     private Car getInitializedCar(CarDto dto) {

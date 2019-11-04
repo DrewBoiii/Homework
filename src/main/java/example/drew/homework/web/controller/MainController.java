@@ -8,6 +8,7 @@ import example.drew.homework.service.UserService;
 import example.drew.homework.web.dto.CarDto;
 import example.drew.homework.web.dto.UserDto;
 import org.springframework.context.MessageSource;
+import org.springframework.lang.Nullable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
@@ -32,8 +35,22 @@ public class MainController {
         this.messageSource = messageSource;
     }
 
-    @GetMapping({"/", "/home"})
-    public String getIndexPage(Model model, @AuthenticationPrincipal User user) throws UserNotFoundException {
+    @GetMapping("/home")
+    public String getIndexPage(Model model, @Nullable @RequestParam("search_criteria") String searchCriteria) {
+        List<Car> cars = carService.getCars();
+
+        if(searchCriteria != null && !searchCriteria.isEmpty()){
+            cars = carService.getCarsBySearchCriteria(searchCriteria);
+        }
+
+        model.addAttribute("cars", cars);
+
+        return "index";
+    }
+
+    // TODO: 11/4/2019 temporary
+    @GetMapping("/message")
+    public String message(Model model, @AuthenticationPrincipal User user) throws UserNotFoundException {
         Optional<example.drew.homework.persistence.model.User> person = Optional.empty();
 
         if (user != null) {

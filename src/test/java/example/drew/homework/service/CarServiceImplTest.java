@@ -46,7 +46,7 @@ public class CarServiceImplTest {
         this.expectedCar = Optional.of(car);
 
         Mockito.when(carRepository.findCarsOrderByCreatedAT()).thenReturn(Collections.emptyList());
-        Mockito.when(carRepository.findCarsByBrand("brand")).thenReturn(Collections.emptyList());
+        Mockito.when(carRepository.findCarsBySearchCriteria("brand")).thenReturn(Collections.emptyList());
         Mockito.when(carRepository.findById(1L)).thenReturn(this.expectedCar);
 //        Mockito.when(carRepository.findById(111L)).thenThrow(new CarNotFoundException());
     }
@@ -88,16 +88,16 @@ public class CarServiceImplTest {
 
     @Test
     public void getCarsByBrand_whenPassingArgBrand_returnNotNullList() {
-        List<Car> cars = carService.getCarsByBrand("brand");
+        List<Car> cars = carService.getCarsBySearchCriteria("brand");
 
         Assert.assertNotNull(cars);
     }
 
     @Test
     public void getNumberOfInvocation_whenCallGetCarByBrandMethod_returnOneTime(){
-        carService.getCarsByBrand(Mockito.anyString());
+        carService.getCarsBySearchCriteria(Mockito.anyString());
 
-        Mockito.verify(carRepository, new Times(1)).findCarsByBrand(Mockito.anyString());
+        Mockito.verify(carRepository, new Times(1)).findCarsBySearchCriteria(Mockito.anyString());
     }
 
 }

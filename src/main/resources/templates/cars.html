@@ -21,14 +21,16 @@
                 <p>There is no cars yet :(</p>
             </div>
 
-            <div th:each="car : ${cars}">
-                <p th:text="${car.brand}">brand</p>
-                <p th:text="${car.model}">model</p>
-                <p th:text="${car.build}">build year</p>
-                <p th:text="${car.kilometers}">kilometers</p>
-                <p th:text="${car.person.username}">person</p>
-                <p><a th:href="@{/cars/} + ${car.id} + @{/details}">details</a></p>
-                <hr>
+            <div th:unless="${cars.isEmpty()}">
+                <div th:each="car : ${cars}">
+                    <p th:text="${car.brand}">brand</p>
+                    <p th:text="${car.model}">model</p>
+                    <p th:text="${car.build}">build year</p>
+                    <p th:text="${car.kilometers}">kilometers</p>
+                    <p th:text="${car.person.username}">person</p>
+                    <p><a th:href="@{|/cars/${car.id}/details|}">details</a></p>
+                    <hr>
+                </div>
             </div>
         </main>
     </div>

@@ -29,6 +29,7 @@ public class CarController {
         this.userService = userService;
     }
 
+    // TODO: 11/4/2019 Do I need CarDto in parameters line?
     @PostMapping("/submit")
     public ResponseEntity<Object> saveCar(@RequestBody CarDto carDto, @AuthenticationPrincipal User user) throws UserNotFoundException {
         Optional<example.drew.homework.persistence.model.User> person = userService.findUserByUsername(user.getUsername());
@@ -48,12 +49,12 @@ public class CarController {
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/cars/all")
-    public ResponseEntity<Object> getCars() {
-        AjaxResponseDto<List<Car>> response = new AjaxResponseDto<>("success", carService.getCars());
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
+//    @GetMapping("/cars/all")
+//    public ResponseEntity<Object> getCars() {
+//        AjaxResponseDto<List<Car>> response = new AjaxResponseDto<>("success", carService.getCars());
+//
+//        return new ResponseEntity<>(response, HttpStatus.OK);
+//    }
 
     @DeleteMapping("/cars/{car_id}/delete")
     public ResponseEntity<Object> deleteCar(@PathVariable("car_id") Long id) throws CarNotFoundException {
