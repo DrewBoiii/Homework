@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/layout}">
 <head>
@@ -17,14 +16,10 @@
 </head>
 <body>
 
-    <header>
-        <h1><span sec:authentication="name"></span>'s Details</h1>
-    </header>
-
     <div layout:fragment="content">
         <main>
             <article>
-                <div id="putResultDiv" align="center"></div>
+                <div id="putResultDiv"></div>
 
                 <form id="carDetailsForm">
                     <div class="form-group" hidden>
@@ -69,8 +64,6 @@
             </article>
         </main>
     </div>
-
-    <footer></footer>
 
 </body>
 </html>

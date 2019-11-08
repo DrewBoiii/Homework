@@ -13,27 +13,15 @@
     <title>Car Sales</title>
 </head>
 <body>
-    <header>Registration</header>
-
-    <nav>
-        <ul>
-            <li>
-                <a th:href="@{/home}">Home</a>
-            </li>
-            <li>
-                <a th:href="@{/editor}">Editor</a>
-            </li>
-            <li>
-                <a th:href="@{/cars}">Cars</a>
-            </li>
-        </ul>
-    </nav>
-
     <main>
         <!--<div id="registrationResultDiv"></div>-->
 
         <div th:if="${param.success}">
             <div class="alert alert-info">You've successfully registered!</div>
+        </div>
+
+        <div th:if="${param.error}">
+            <div class="alert alert-danger">Please correct the form bellow.</div>
         </div>
 
         <div id="registrationFormDiv">
@@ -63,7 +51,5 @@
         </div>
 
     </main>
-
-    <footer></footer>
 </body>
 </html>

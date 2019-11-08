@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/layout}">
 <head>
     <meta charset="UTF-8">
     <link th:href="@{/css/styles.css}" rel="stylesheet">
-
+    <link th:href="@{/css/alert.css}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.4.1.js"
             integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
             crossorigin="anonymous"></script>
@@ -17,47 +16,38 @@
 </head>
 <body>
 
-    <header>
-        <h1><span sec:authentication="name"></span>'s Editor</h1>
-    </header>
-
     <div layout:fragment="content">
         <main>
-
             <div>
-
-                <div id="postResultDiv" align="center"></div>
-
-                <form id="carForm">
-                    <div class="form-group">
-                        <label for="brand">Brand:</label>
-                        <input type="text" class="form-control" id="brand" placeholder="Skoda" name="brand" th:value="${car.brand}">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="model">Model:</label>
-                        <input type="text" class="form-control" id="model" placeholder="Rapid" name="model"  th:value="${car.model}">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="build">Build year:</label>
-                        <input type="text" class="form-control" id="build" placeholder="2018" name="build"  th:value="${car.build}">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="kilometers">Kilometers:</label>
-                        <input type="text" class="form-control" id="kilometers" placeholder="1233" name="kilometers"  th:value="${car.kilometers}">
-                    </div>
-
-                    <button type="submit">Publish</button>
-                </form>
-
+                <div id="postResultDiv"></div>
+                <div class="row">
+                    <form id="carForm">
+                        <div class="center-align">
+                            <div class="input-field col s8">
+                                <input id="brand" type="text" class="validate" name="brand" th:value="${car.brand}">
+                                <label for="brand">Brand</label>
+                            </div>
+                            <div class="input-field col s8">
+                                <input id="model" type="text" class="validate" name="model"  th:value="${car.model}">
+                                <label for="model">Model</label>
+                            </div>
+                            <div class="input-field col s8">
+                                <input id="build" type="text" class="validate" name="build"  th:value="${car.build}">
+                                <label for="build">Build</label>
+                            </div>
+                            <div class="input-field col s8">
+                                <input id="kilometers" type="text" class="validate" name="build"  th:value="${car.build}">
+                                <label for="kilometers">Kilometers</label>
+                            </div>
+                            <div class="col s8 right-align">
+                                <button type="submit" class="waves-effect waves-light btn">Publish</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-
         </main>
     </div>
-
-    <footer></footer>
 
 </body>
 </html>

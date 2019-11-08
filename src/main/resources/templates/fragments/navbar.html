@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -10,23 +9,17 @@
 
     <div th:fragment="navbar">
         <nav>
-            <ul>
-                <li>
-                    <a th:href="@{/home}">Home</a>
-                </li>
-                <li>
-                    <a th:href="@{/editor}">Editor</a>
-                </li>
-                <li>
-                    <a th:href="@{/cars}">Cars</a>
-                </li>
-                <li sec:authorize="isAnonymous()">
-                    <a th:href="@{/login}" id="signIn">Sign in</a>
-                </li>
-                <li sec:authorize="isAuthenticated()" id="signOut">
-                    <a th:href="@{/logout}">Sign out</a>
-                </li>
-            </ul>
+            <div class="nav-wrapper">
+                <form>
+                    <div class="input-field">
+                        <input id="search" type="search" required>
+                        <label class="label-icon" for="search">
+                            <i class="material-icons">search</i>
+                        </label>
+                        <i class="material-icons">close</i>
+                    </div>
+                </form>
+            </div>
         </nav>
     </div>
 

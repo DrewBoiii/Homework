@@ -2,66 +2,52 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-
     <link th:href="@{/css/styles.css}" rel="stylesheet">
-
+    <link th:href="@{/css/login.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
     <title>Title</title>
 </head>
 <body>
 
-<header>Registration</header>
-
-<nav>
-    <ul>
-        <li>
-            <a th:href="@{/home}">Home</a>
-        </li>
-        <li>
-            <a th:href="@{/editor}">Editor</a>
-        </li>
-        <li>
-            <a th:href="@{/cars}">Cars</a>
-        </li>
-    </ul>
-</nav>
-
 <main>
     <div id="loginResultDiv"></div>
 
-    <div id="loginFormDiv">
+    <div id="loginFormDiv" class="login-form">
         <form th:action="@{/login}" method="post" id="loginForm">
 
-            <div th:if="${param.error}">
-                <div class="alert alert-danger">Invalid username or
-                    password.</div>
+            <div th:if="${param.error}" >
+                <div class="alert alert-danger">Invalid username or password.</div>
             </div>
 
             <div th:if="${param.logout}">
                 <div class="alert alert-info">You have been logged out.</div>
             </div>
 
-            <div>
+            <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" name="username">
+                <input type="text" id="username" name="username" class="form-control">
             </div>
 
-            <div>
+            <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password">
+                <input type="password" id="password" name="password" class="form-control">
             </div>
 
-            <button type="submit" id="signinButton">Sign in</button>
+            <div class="form-group">
+                <button type="submit" id="signinButton" class="btn btn-success btn-block">Sign in</button>
+            </div>
         </form>
 
         <br/>
-        <div class="alert alert-info">
-            <p>New here? click <a th:href="@{/registration}">this</a> to sign up!</p>
+        <div>
+            <p class="text-center">New here? Click
+                <a th:href="@{/registration}" class="text-primary">this</a>
+                to sign up!</p>
         </div>
     </div>
 
 </main>
-
-<footer></footer>
 
 </body>
 </html>

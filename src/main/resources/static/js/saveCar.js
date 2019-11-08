@@ -24,16 +24,21 @@ $(document).ready(
                 success : function(result) {
                     if (result.status === "success") {
                         $("#postResultDiv").html(
-                            "" + result.data.brand + " " + result.data.model
-                            + " was successfully saved!" + "<br>" + "</p>");
+                            "<div class='msg msg-success z-depth-3'>"
+                            + result.data.brand
+                            + " "
+                            + result.data.model
+                            + " was successfully saved!"
+                            + "</div>");
                     } else {
-                        $("#postResultDiv").html("<strong>Error</strong>");
+                        $("#postResultDiv").html("<div class='msg msg-error z-depth-3'>Error</div>");
                     }
                     console.log(result);
                 },
                 error : function(e) {
-                    alert("Error!");
-                    console.log("ERROR: ", e);
+                    $("#postResultDiv").html("<div class='msg msg-error z-depth-3'>Error</div>");
+                    // alert("Error!");
+                    // console.log("ERROR: ", e);
                 }
             });
 

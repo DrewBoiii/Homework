@@ -35,6 +35,11 @@ public class MainController {
         this.messageSource = messageSource;
     }
 
+    @GetMapping("/")
+    public String getPage(){
+        return "redirect:/home";
+    }
+
     @GetMapping("/home")
     public String getIndexPage(Model model, @Nullable @RequestParam("search_criteria") String searchCriteria) {
         List<Car> cars = carService.getCars();
