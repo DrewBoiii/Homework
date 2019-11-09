@@ -1,8 +1,8 @@
 .msg {
-    width: 90%;
+    width: 80%;
     border: 1px solid;
     padding:10px;
-    margin: 20px;
+    margin: 20px auto;
     color: grey;
 }
 .msg-error {
@@ -23,7 +23,7 @@
 }
 
 .msg-success {
-    border-color: #00CC22;
-    background-color: #88FF66;
+    border-color: #39cc22;
+    background-color: #42ff5d;
     color: white;
 }

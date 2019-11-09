@@ -1,8 +1,8 @@
 form {
     width: 400px;
-    margin: 40px auto;
+    margin: 100px auto 40px;
     background: #f7f7f7;
-    box-shadow: 1px 1px 15px 2px indianred;
+    box-shadow: 1px 1px 15px 2px #73cd68;
     padding: 30px;
 }
 

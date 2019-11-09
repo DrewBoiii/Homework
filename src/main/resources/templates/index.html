@@ -20,24 +20,17 @@
 
     <div layout:fragment="content">
         <main>
-            <div id="message">
-                <h3 th:text="${name}">Name</h3>
-                <h5 th:text="#{greeting.user}">Greeting</h5>
-                <br>
-                <span th:text="#{lang.change}">Language</span>:
-                <select id="locales">
-                    <option value=""></option>
-                    <option value="en" th:text="#{lang.eng}">English</option>
-                    <option value="ru" th:text="#{lang.ru}">Russian</option>
-                </select>
-            </div>
-
-            <div id="search">
-                <form action="/home" method="get">
-                    <input type="text" size="50" name="search_criteria">
-                    <input type="submit" value="Search">
-                </form>
-            </div>
+<!--            <div id="message">-->
+<!--                <h3 th:text="${name}">Name</h3>-->
+<!--                <h5 th:text="#{greeting.user}">Greeting</h5>-->
+<!--                <br>-->
+<!--                <span th:text="#{lang.change}">Language</span>:-->
+<!--                <select id="locales" style="display: block">-->
+<!--                    <option value=""></option>-->
+<!--                    <option value="en" th:text="#{lang.eng}">English</option>-->
+<!--                    <option value="ru" th:text="#{lang.ru}">Russian</option>-->
+<!--                </select>-->
+<!--            </div>-->
 
             <div th:if="${cars.isEmpty()}">
                 <h4>There is no cars yet :(</h4>

@@ -41,7 +41,7 @@ public class MainController {
     }
 
     @GetMapping("/home")
-    public String getIndexPage(Model model, @Nullable @RequestParam("search_criteria") String searchCriteria) {
+    public String getIndexPage(Model model, @Nullable @RequestParam("search") String searchCriteria) {
         List<Car> cars = carService.getCars();
 
         if(searchCriteria != null && !searchCriteria.isEmpty()){
