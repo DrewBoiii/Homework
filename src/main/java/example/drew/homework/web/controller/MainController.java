@@ -7,16 +7,14 @@ import example.drew.homework.service.CarService;
 import example.drew.homework.service.UserService;
 import example.drew.homework.web.dto.CarDto;
 import example.drew.homework.web.dto.UserDto;
+import example.drew.homework.web.filter.criteria.CarCriteria;
 import org.springframework.context.MessageSource;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Locale;
@@ -40,8 +38,14 @@ public class MainController {
         return "redirect:/home";
     }
 
+    @ModelAttribute("car_criteria")
+    public CarCriteria carCriteria(){
+        return new CarCriteria();
+    }
+
+    // TODO: 09.11.2019 add filtering
     @GetMapping("/home")
-    public String getIndexPage(Model model, @Nullable @RequestParam("search") String searchCriteria) {
+    public String getIndexPage(Model model, @ModelAttribute CarCriteria carCriteria, @Nullable @RequestParam("search") String searchCriteria) {
         List<Car> cars = carService.getCars();
 
         if(searchCriteria != null && !searchCriteria.isEmpty()){
