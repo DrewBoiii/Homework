@@ -10,10 +10,9 @@
     <div th:fragment="navbar">
         <nav>
             <div class="nav-wrapper">
-                <form>
+                <form th:action="@{/home}" method="get">
                     <div class="input-field">
                         <input id="search" type="search" size="100" name="search" required>
-<!--                        <input type="submit" value="Search">-->
                         <label class="label-icon" for="search">
                             <i class="material-icons">search</i>
                         </label>

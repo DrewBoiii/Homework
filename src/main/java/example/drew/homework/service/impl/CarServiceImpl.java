@@ -7,6 +7,7 @@ import example.drew.homework.service.CarService;
 import example.drew.homework.web.dto.CarDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -85,6 +86,11 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<Car> getCarsBySearchCriteria(String searchCriteria) {
         return carRepository.findCarsBySearchCriteria(searchCriteria);
+    }
+
+    @Override
+    public List<Car> getCarsBySpecification(Specification<Car> specification) {
+        return carRepository.findAll(specification);
     }
 
     private Car getInitializedCar(CarDto dto) {

@@ -34,15 +34,22 @@
 
             <div id="filter" class="row">
                 <div id="filter_form" class="col s12">
-                    <form th:action="@{/home}" th:object="${criteria}" method="get">
-                        <div id="brands" class="input-field col s4">
-                            <select id="brand_select" th:field="*{brand}">
-                                <option value="" selected>Brand</option>
-                                <option th:each="b : ${brands}" th:value="${b.name}" th:text="${b.name}">Brand Option</option>
-                            </select>
-                            <label for="brand_select">Brands</label>
+                    <form th:action="@{/home}" th:object="${car_criteria}" method="get">
+                        <div class="input-field col s4">
+                            <input id="brand" type="text" class="validate" th:field="*{brand}">
+                            <label for="brand">Brand</label>
                         </div>
-
+                        <div class="input-field col s4">
+                            <input id="model" type="text" class="validate" th:field="*{model}">
+                            <label for="model">Model</label>
+                        </div>
+<!--                        <div id="brands" class="input-field col s4">-->
+<!--                            <select id="brand_select" th:field="*{brand}">-->
+<!--                                <option value="" selected>Brand</option>-->
+<!--                                <option th:each="b : ${brands}" th:value="${b.name}" th:text="${b.name}">Brand Option</option>-->
+<!--                            </select>-->
+<!--                            <label for="brand_select">Brands</label>-->
+<!--                        </div>-->
                         <div class="right-align">
                             <button type="submit" id="player-filter-btn" class="waves-effect waves-light btn">Фильтровать</button>
                         </div>

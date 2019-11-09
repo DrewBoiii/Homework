@@ -8,15 +8,14 @@ import example.drew.homework.service.UserService;
 import example.drew.homework.web.dto.CarDto;
 import example.drew.homework.web.dto.UserDto;
 import example.drew.homework.web.filter.criteria.CarCriteria;
+import example.drew.homework.web.filter.spec.CarSpecification;
 import org.springframework.context.MessageSource;
-import org.springframework.lang.Nullable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
@@ -34,25 +33,20 @@ public class MainController {
     }
 
     @GetMapping("/")
-    public String getPage(){
+    public String getPage() {
         return "redirect:/home";
     }
 
     @ModelAttribute("car_criteria")
-    public CarCriteria carCriteria(){
+    public CarCriteria carCriteria() {
         return new CarCriteria();
     }
 
-    // TODO: 09.11.2019 add filtering
     @GetMapping("/home")
-    public String getIndexPage(Model model, @ModelAttribute CarCriteria carCriteria, @Nullable @RequestParam("search") String searchCriteria) {
-        List<Car> cars = carService.getCars();
+    public String getIndexPage(Model model, @ModelAttribute("car_criteria") CarCriteria carCriteria) {
+        CarSpecification carSpecification = new CarSpecification(carCriteria);
 
-        if(searchCriteria != null && !searchCriteria.isEmpty()){
-            cars = carService.getCarsBySearchCriteria(searchCriteria);
-        }
-
-        model.addAttribute("cars", cars);
+        model.addAttribute("cars", carService.getCarsBySpecification(carSpecification));
 
         return "index";
     }

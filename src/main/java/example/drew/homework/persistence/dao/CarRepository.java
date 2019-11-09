@@ -2,11 +2,12 @@ package example.drew.homework.persistence.dao;
 
 import example.drew.homework.persistence.model.Car;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface CarRepository extends JpaRepository<Car, Long> {
+public interface CarRepository extends JpaRepository<Car, Long>, JpaSpecificationExecutor<Car> {
 
     @Query(
             value = "SELECT * FROM car WHERE " +
