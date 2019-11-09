@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -32,7 +32,7 @@ public class CarDto {
 
     @PastOrPresent
     @NotBlank(message = "should be blanked")
-    private Date build;
+    private LocalDate build;
 
     private User person;
 

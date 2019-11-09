@@ -38,6 +38,10 @@
 
             <div th:unless="${cars.isEmpty()}">
                 <div id="cars" th:each="car : ${cars}">
+                    <img th:src="@{images/vehicle.jpg}"
+                         alt="car"
+                         height="200"
+                         width="200">
                     <p th:text="${car.brand}">brand</p>
                     <p th:text="${car.model}">model</p>
                     <p th:text="${car.build}">build year</p>

@@ -18,6 +18,7 @@ import org.mockito.internal.verification.Times;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -39,7 +40,7 @@ public class CarServiceImplTest {
 
     @Before
     public void init() {
-        this.carDto = new CarDto(1L, "brand", "model", 123L, new Date(), new User());
+        this.carDto = new CarDto(1L, "brand", "model", 123L, LocalDate.now(), new User());
 
         Car car = getInitCar();
 

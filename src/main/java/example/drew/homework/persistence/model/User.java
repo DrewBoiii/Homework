@@ -5,8 +5,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
 import java.util.Set;
 
 @Data
@@ -32,7 +32,7 @@ public class User implements UserDetails {
     private String email;
 
     @Column
-    private Date createdAt;
+    private LocalDate createdAt;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -50,7 +50,7 @@ public class User implements UserDetails {
 
     @PrePersist
     void createdAt(){
-        this.createdAt = new Date();
+        this.createdAt = LocalDate.now();
     }
 
     @Override

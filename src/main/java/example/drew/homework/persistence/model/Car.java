@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -29,16 +29,16 @@ public class Car {
     private Long kilometers;
 
     @Column
-    private Date build;
+    private LocalDate build;
 
     @ManyToOne
     private User person;
 
     @Column
-    private Date createdAT;
+    private LocalDate createdAT;
 
     @PrePersist
     void createdAt(){
-        this.createdAT = new Date();
+        this.createdAT = LocalDate.now();
     }
 }
