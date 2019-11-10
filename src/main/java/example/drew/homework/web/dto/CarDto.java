@@ -1,5 +1,6 @@
 package example.drew.homework.web.dto;
 
+import example.drew.homework.constraint.anotation.ValidDateFormat;
 import example.drew.homework.persistence.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +31,8 @@ public class CarDto {
     @NotBlank(message = "should be blanked")
     private Long kilometers;
 
+    // TODO: 10.11.2019 past or present doesn't work 
+    @ValidDateFormat
     @PastOrPresent
     @NotBlank(message = "should be blanked")
     private LocalDate build;

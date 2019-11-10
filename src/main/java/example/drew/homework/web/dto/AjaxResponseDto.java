@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 public class AjaxResponseDto<T> {
 
     private String status;
+    // TODO: 10.11.2019 add error message to controllers
+//    private String message;
     private T data;
 
 }

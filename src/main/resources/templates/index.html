@@ -19,7 +19,7 @@
 <body>
 
     <div layout:fragment="content">
-        <main>
+        <main class="container">
 <!--            <div id="message">-->
 <!--                <h3 th:text="${name}">Name</h3>-->
 <!--                <h5 th:text="#{greeting.user}">Greeting</h5>-->
@@ -32,14 +32,25 @@
 <!--                </select>-->
 <!--            </div>-->
 
-            <div id="filter" class="row">
-                <div id="filter_form" class="col s12">
+            <div id="filter">
+                <div id="search_form" class="nav-wrapper">
+                    <form th:action="@{/home}" method="get">
+                        <div class="input-field">
+                            <input id="search" type="search" name="search" required>
+                            <label class="label-icon" for="search">
+                                <i class="material-icons">search</i>
+                            </label>
+                            <i class="material-icons">close</i>
+                        </div>
+                    </form>
+                </div>
+                <div id="filter_form" class="row">
                     <form th:action="@{/home}" th:object="${car_criteria}" method="get">
-                        <div class="input-field col s4">
+                        <div class="input-field col s6">
                             <input id="brand" type="text" class="validate" th:field="*{brand}">
                             <label for="brand">Brand</label>
                         </div>
-                        <div class="input-field col s4">
+                        <div class="input-field col s6">
                             <input id="model" type="text" class="validate" th:field="*{model}">
                             <label for="model">Model</label>
                         </div>
@@ -51,18 +62,22 @@
 <!--                            <label for="brand_select">Brands</label>-->
 <!--                        </div>-->
                         <div class="right-align">
-                            <button type="submit" id="player-filter-btn" class="waves-effect waves-light btn">Фильтровать</button>
+                            <button type="submit" id="player-filter-btn" class="waves-effect waves-light btn">Filter</button>
                         </div>
                     </form>
                 </div>
             </div>
 
             <div th:if="${cars.isEmpty()}">
-                <h4>There is no cars yet :(</h4>
+                <div class="divider"></div>
+                <div class="section">
+                    <h4>There is no cars yet :(</h4>
+                </div>
             </div>
 
             <div th:unless="${cars.isEmpty()}">
-                <div id="cars" th:each="car : ${cars}">
+                <div class="divider"></div>
+                <div id="cars" class="section" th:each="car : ${cars}">
                     <img th:src="@{images/vehicle.jpg}"
                          alt="car"
                          height="200"
