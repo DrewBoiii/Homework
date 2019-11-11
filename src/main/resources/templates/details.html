@@ -17,51 +17,48 @@
 <body>
 
     <div layout:fragment="content">
-        <main>
-            <article>
+        <main class="container">
+            <div>
                 <div id="putResultDiv"></div>
 
                 <form id="carDetailsForm">
-                    <div class="form-group" hidden>
+                    <div class="input-field" hidden>
                         <label for="id">Id:</label>
-                        <input type="text" class="form-control" id="id" name="id" th:value="${car.id}">
+                        <input type="text" class="validate" id="id" name="id" th:value="${car.id}">
                     </div>
-
-                    <div class="form-group">
+                    <div class="input-field">
                         <label for="brand">Brand:</label>
-                        <input type="text" class="form-control" id="brand" name="brand"
+                        <input type="text" class="validate" id="brand" name="brand"
                                th:placeholder="${car.brand}" th:value="${car.brand}">
                     </div>
-
-                    <div class="form-group">
+                    <div class="input-field">
                         <label for="model">Model:</label>
-                        <input type="text" class="form-control" id="model" name="model"
+                        <input type="text" class="validate" id="model" name="model"
                                th:placeholder="${car.model}" th:value="${car.model}">
                     </div>
-
-                    <div class="form-group">
+                    <div class="input-field">
                         <label for="build">Build year:</label>
-                        <input type="text" class="form-control" id="build" name="build"
+                        <input type="text" class="validate" id="build" name="build"
                                th:placeholder="${car.build}" th:value="${car.build}">
                     </div>
-
-                    <div class="form-group">
+                    <div class="input-field">
                         <label for="kilometers">Kilometers:</label>
-                        <input type="text" class="form-control" id="kilometers" name="kilometers"
+                        <input type="text" class="validate" id="kilometers" name="kilometers"
                                th:placeholder="${car.kilometers}" th:value="${car.kilometers}">
                     </div>
-
-                    <button type="submit">Update</button>
+                    <div class="right-align">
+                        <button type="submit" class="waves-effect waves-light btn">Update</button>
+                    </div>
                 </form>
 
-                <div>
-                    <button id="deleteCar">Remove</button>
+                <div class="right-align">
+                    <button id="deleteCar" class="waves-effect waves-light btn">Remove</button>
                 </div>
 
                 <div id="getDeleteResultDiv">
 
                 </div>
-            </article>
+            </div>
         </main>
     </div>
 
