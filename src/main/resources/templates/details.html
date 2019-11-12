@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/layout}">
 <head>
     <meta charset="UTF-8">
     <link th:href="@{/css/styles.css}" rel="stylesheet">
-
     <script src="https://code.jquery.com/jquery-3.4.1.js"
             integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
             crossorigin="anonymous"></script>
@@ -20,8 +20,10 @@
         <main class="container">
             <div>
                 <div id="putResultDiv"></div>
+                <div id="getDeleteResultDiv"></div>
 
                 <form id="carDetailsForm">
+                    <h3>Car Details</h3>
                     <div class="input-field" hidden>
                         <label for="id">Id:</label>
                         <input type="text" class="validate" id="id" name="id" th:value="${car.id}">
@@ -46,17 +48,14 @@
                         <input type="text" class="validate" id="kilometers" name="kilometers"
                                th:placeholder="${car.kilometers}" th:value="${car.kilometers}">
                     </div>
-                    <div class="right-align">
+                    <div class="left-align">
                         <button type="submit" class="waves-effect waves-light btn">Update</button>
                     </div>
                 </form>
-
-                <div class="right-align">
-                    <button id="deleteCar" class="waves-effect waves-light btn">Remove</button>
-                </div>
-
-                <div id="getDeleteResultDiv">
-
+                <div>
+                    <div class="right-align">
+                        <button id="deleteCar" class="waves-effect waves-light btn red">Remove</button>
+                    </div>
                 </div>
             </div>
         </main>

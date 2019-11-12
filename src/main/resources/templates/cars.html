@@ -11,20 +11,53 @@
 <body>
 
     <div layout:fragment="content">
-        <main>
+        <main class="container">
             <div th:if="${cars.isEmpty()}">
-                <p>There is no cars yet :(</p>
+                <div class="divider"></div>
+                <div class="section">
+                    <h4>There is no cars yet :(</h4>
+                </div>
             </div>
 
-            <div th:unless="${cars.isEmpty()}">
-                <div th:each="car : ${cars}">
-                    <p th:text="${car.brand}">brand</p>
-                    <p th:text="${car.model}">model</p>
-                    <p th:text="${car.build}">build year</p>
-                    <p th:text="${car.kilometers}">kilometers</p>
-                    <p th:text="${car.person.username}">person</p>
-                    <p><a th:href="@{|/cars/${car.id}/details|}">details</a></p>
-                    <hr>
+<!--            <div th:unless="${cars.isEmpty()}">-->
+<!--                <div class="divider"></div>-->
+<!--                <div class="section">-->
+<!--                    <h4>Cars</h4>-->
+<!--                    <div th:each="car : ${cars}">-->
+<!--                        <p th:text="${car.brand}">brand</p>-->
+<!--                        <p th:text="${car.model}">model</p>-->
+<!--                        <p th:text="${car.build}">build year</p>-->
+<!--                        <p th:text="${car.kilometers}">kilometers</p>-->
+<!--                        <p th:text="${car.person.username}">person</p>-->
+<!--                        <p><a th:href="@{|/cars/${car.id}/details|}">details</a></p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+            <div class="row">
+                <div th:unless="${cars.isEmpty()}">
+                    <div id="cars" th:each="car : ${cars}">
+                        <div class="col s4">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img th:src="@{images/vehicle.jpg}"
+                                         alt="car">
+                                    <a th:href="@{|/cars/${car.id}/details|}" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">mode_edit</i></a>
+                                </div>
+                                <div class="card-content">
+                                        <span class="card-title">
+                                            <span th:text="${car.brand} + ' ' + ${car.model} + ' ' + ${car.build.year}">Card Title</span>
+                                        </span>
+                                    <p th:text="${car.brand}">brand</p>
+                                    <p th:text="${car.model}">model</p>
+                                    <p th:text="${car.build}">build year</p>
+                                    <p th:text="${car.kilometers}">kilometers</p>
+                                    <p th:text="${car.person.username}">person</p>
+                                    <p th:text="${car.createdAT}">created at</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
