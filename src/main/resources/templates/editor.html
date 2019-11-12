@@ -11,7 +11,8 @@
             integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
             crossorigin="anonymous"></script>
     <script th:src="@{js/saveCar.js}"></script>
-
+    <script th:src="@{/../../../js/deleteCar.js}"></script>
+    <script th:src="@{/../../../js/updateCar.js}"></script>
     <title>Car Sales</title>
 </head>
 <body>
@@ -20,8 +21,11 @@
         <main class="container">
             <div>
                 <div id="postResultDiv"></div>
+                <div id="putResultDiv"></div>
+                <div id="getDeleteResultDiv"></div>
                 <div>
                     <form id="carForm">
+                        <h3>Car Editor</h3>
                         <div>
                             <div class="input-field col s8">
                                 <input id="brand" type="text" class="validate" name="brand" th:value="${car.brand}">
@@ -39,11 +43,19 @@
                                 <input id="kilometers" type="text" class="validate" name="kilometers"  th:value="${car.kilometers}">
                                 <label for="kilometers">Kilometers</label>
                             </div>
-                            <div class="col s8 right-align">
+                            <div th:if="${car.brand == null}" class="right-align">
                                 <button type="submit" class="waves-effect waves-light btn">Publish</button>
+                            </div>
+                            <div th:unless="${car.brand == null}" class="left-align">
+                                <button type="submit" class="waves-effect waves-light btn">Update</button>
                             </div>
                         </div>
                     </form>
+                    <div>
+                        <div th:if="${car.brand != null}" class="right-align">
+                            <button id="deleteCar" class="waves-effect waves-light btn red">Remove</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>

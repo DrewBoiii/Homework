@@ -93,6 +93,15 @@ public class MainController {
         return "details";
     }
 
+    @GetMapping("/cars/{car_id}/editor")
+    public String getCarEditor(@PathVariable("car_id") Long id, Model model) throws CarNotFoundException {
+        Optional<Car> car = carService.getCarById(id);
+
+        car.ifPresent(car1 -> model.addAttribute("car", car1));
+
+        return "editor";
+    }
+
     @GetMapping("/editor")
     public String getEditorPage(Model model) {
         model.addAttribute("car", new CarDto());

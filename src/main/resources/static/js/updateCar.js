@@ -1,7 +1,7 @@
 $(document).ready(
     function() {
 
-        $("#carDetailsForm").submit(function(event) {
+        $("#carForm").submit(function(event) {
             event.preventDefault();
             ajaxUpdate();
         });
@@ -37,23 +37,22 @@ $(document).ready(
                     console.log("Result status:" + result.status);
 
                     // Fill out the form
-                    $("#id").val(result.id);
-                    $("#brand").val(result.brand);
-                    $("#model").val(result.model);
-                    $("#build").val(result.build);
-                    $("#kilometers").val(result.kilometers);
+                    // $("#id").val(result.id);
+                    // $("#brand").val(result.brand);
+                    // $("#model").val(result.model);
+                    // $("#build").val(result.build);
+                    // $("#kilometers").val(result.kilometers);
 
                     // Update the form
-                    $('#carDetailsForm' + result.id).find("input[name='brand']").val(result.brand);
-                    $('#carDetailsForm' + result.id).find("input[name='model']").val(result.model);
-                    $('#carDetailsForm' + result.id).find("input[name='build']").val(result.build);
-                    $('#carDetailsForm' + result.id).find("input[name='kilometers']").val(result.kilometers);
+                    // $('#carDetailsForm' + result.id).find("input[name='brand']").val(result.brand);
+                    // $('#carDetailsForm' + result.id).find("input[name='model']").val(result.model);
+                    // $('#carDetailsForm' + result.id).find("input[name='build']").val(result.build);
+                    // $('#carDetailsForm' + result.id).find("input[name='kilometers']").val(result.kilometers);
 
-                    console.log("Result status:" + result.status);
                     console.log(window.location);
                 },
                 error : function(e) {
-                    alert("Error!");
+                    // alert("Error!");
 
                     console.log("Result status:" + e.status);
                     console.log(window.location);
