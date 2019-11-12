@@ -76,6 +76,7 @@ public class CarServiceImpl implements CarService {
             oldCar.get().setModel(newCar.get().getModel());
             oldCar.get().setBuild(newCar.get().getBuild());
             oldCar.get().setKilometers(newCar.get().getKilometers());
+            oldCar.get().setDescription(newCar.get().getDescription());
 
             carRepository.save(oldCar.get());
 
@@ -101,6 +102,7 @@ public class CarServiceImpl implements CarService {
         car.setModel(dto.getModel());
         car.setBuild(dto.getBuild());
         car.setKilometers(dto.getKilometers());
+        car.setDescription(dto.getDescription());
 
         return car;
     }

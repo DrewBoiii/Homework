@@ -87,14 +87,22 @@
                                     </div>
                                     <div class="card-content">
                                         <span class="card-title">
-                                            <span th:text="${car.brand} + ' ' + ${car.model} + ' ' + ${car.build.year}">Card Title</span>
+                                            <span th:text="${car.brand} + ' ' + ${car.model} + ' ' + ${car.build.year}"
+                                                  class="card-title activator grey-text text-darken-4">Card Title
+                                                <i class="material-icons right">more_vert</i>
+                                            </span>
                                         </span>
-                                        <p th:text="${car.brand}">brand</p>
-                                        <p th:text="${car.model}">model</p>
-                                        <p th:text="${car.build}">build year</p>
+<!--                                        <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>-->
                                         <p th:text="${car.kilometers}">kilometers</p>
                                         <p th:text="${car.person.username}">person</p>
                                         <p th:text="${car.createdAT}">created at</p>
+                                    </div>
+                                    <div class="card-reveal">
+                                        <span th:text="${car.brand} + ' ' + ${car.model} + ' ' + ${car.build.year}"
+                                              class="card-title grey-text text-darken-4">Card Title
+                                            <i class="material-icons right">close</i>
+                                        </span>
+                                        <p th:text="${car.description}">description</p>
                                     </div>
                                 </div>
                             </div>

@@ -38,4 +38,10 @@
         </insert>
     </changeSet>
 
+    <changeSet id="13" author="DrewBoiii">
+        <addColumn tableName="car">
+            <column name="description" type="VARCHAR"/>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

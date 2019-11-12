@@ -43,6 +43,10 @@
                                 <input id="kilometers" type="text" class="validate" name="kilometers"  th:value="${car.kilometers}">
                                 <label for="kilometers">Kilometers</label>
                             </div>
+                            <div class="input-field col s8">
+                                <input id="description" type="text" class="validate" name="description"  th:value="${car.description}">
+                                <label for="description">description</label>
+                            </div>
                             <div th:if="${car.brand == null}" class="right-align">
                                 <button type="submit" class="waves-effect waves-light btn">Publish</button>
                             </div>

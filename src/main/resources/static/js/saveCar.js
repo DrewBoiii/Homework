@@ -12,7 +12,8 @@ $(document).ready(
                 brand : $("#brand").val(),
                 model : $("#model").val(),
                 build : $("#build").val(),
-                kilometers : $("#kilometers").val()
+                kilometers : $("#kilometers").val(),
+                description : $("#description").val()
             };
 
             $.ajax({

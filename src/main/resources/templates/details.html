@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/layout}">
 <head>
@@ -21,8 +20,8 @@
                     <h3>
                         <span th:text="${car.brand} + ' ' + ${car.model} + ' ' + ${car.build.year}">Car</span>
                     </h3>
-                    <p>description</p>
                     <p th:text="${car.kilometers}">kilometers</p>
+                    <p th:text="${car.description}">description</p>
                     <p th:text="${car.person.username}">person</p>
                     <p th:text="${car.createdAT}">created at</p>
                 </div>

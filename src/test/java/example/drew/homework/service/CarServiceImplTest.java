@@ -40,7 +40,7 @@ public class CarServiceImplTest {
 
     @Before
     public void init() {
-        this.carDto = new CarDto(1L, "brand", "model", 123L, LocalDate.now(), new User());
+        this.carDto = new CarDto(1L, "brand", "model", 123L, LocalDate.now(), "description", new User());
 
         Car car = getInitCar();
 

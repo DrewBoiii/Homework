@@ -37,6 +37,9 @@ public class CarDto {
     @NotBlank(message = "should be blanked")
     private LocalDate build;
 
+    @Size(max = Integer.MAX_VALUE / 2)
+    private String description;
+
     private User person;
 
 }

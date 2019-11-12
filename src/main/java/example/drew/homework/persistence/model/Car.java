@@ -29,6 +29,9 @@ public class Car {
     private Long kilometers;
 
     @Column
+    private String description;
+
+    @Column
     private LocalDate build;
 
     @ManyToOne
