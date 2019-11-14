@@ -10,6 +10,8 @@ import example.drew.homework.web.dto.UserDto;
 import example.drew.homework.web.filter.criteria.CarCriteria;
 import example.drew.homework.web.filter.spec.CarSpecification;
 import org.springframework.context.MessageSource;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -46,7 +48,7 @@ public class MainController {
     public String getIndexPage(Model model, @ModelAttribute("car_criteria") CarCriteria carCriteria) {
         CarSpecification carSpecification = new CarSpecification(carCriteria);
 
-        model.addAttribute("cars", carService.getCarsBySpecification(carSpecification));
+        model.addAttribute("cars", carService.getCarsBySpecification(carSpecification, PageRequest.of(0, 3, Sort.by("createdAt").descending())));
 
         return "index";
     }

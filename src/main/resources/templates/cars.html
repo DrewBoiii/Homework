@@ -18,22 +18,6 @@
                     <h4>There is no cars yet :(</h4>
                 </div>
             </div>
-
-<!--            <div th:unless="${cars.isEmpty()}">-->
-<!--                <div class="divider"></div>-->
-<!--                <div class="section">-->
-<!--                    <h4>Cars</h4>-->
-<!--                    <div th:each="car : ${cars}">-->
-<!--                        <p th:text="${car.brand}">brand</p>-->
-<!--                        <p th:text="${car.model}">model</p>-->
-<!--                        <p th:text="${car.build}">build year</p>-->
-<!--                        <p th:text="${car.kilometers}">kilometers</p>-->
-<!--                        <p th:text="${car.person.username}">person</p>-->
-<!--                        <p><a th:href="@{|/cars/${car.id}/details|}">details</a></p>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-
             <div class="row">
                 <div th:unless="${cars.isEmpty()}">
                     <div id="cars" th:each="car : ${cars}">
@@ -53,7 +37,7 @@
                                     <p th:text="${car.build}">build year</p>
                                     <p th:text="${car.kilometers}">kilometers</p>
                                     <p th:text="${car.person.username}">person</p>
-                                    <p th:text="${car.createdAT}">created at</p>
+                                    <p th:text="${car.createdAt}">created at</p>
                                 </div>
                             </div>
                         </div>

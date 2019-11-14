@@ -38,10 +38,10 @@ public class Car {
     private User person;
 
     @Column
-    private LocalDate createdAT;
+    private LocalDate createdAt;
 
     @PrePersist
     void createdAt(){
-        this.createdAT = LocalDate.now();
+        this.createdAt = LocalDate.now();
     }
 }

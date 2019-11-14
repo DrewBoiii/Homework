@@ -7,6 +7,8 @@ import example.drew.homework.service.CarService;
 import example.drew.homework.web.dto.CarDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +27,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<Car> getCars() {
-        return carRepository.findCarsOrderByCreatedAT();
+        return carRepository.findCarsOrderByCreatedAt();
     }
 
     @Override
@@ -89,9 +91,14 @@ public class CarServiceImpl implements CarService {
         return carRepository.findCarsBySearchCriteria(searchCriteria);
     }
 
+//    @Override
+//    public List<Car> getCarsBySpecification(Specification<Car> specification) {
+//        return carRepository.findAll(specification);
+//    }
+
     @Override
-    public List<Car> getCarsBySpecification(Specification<Car> specification) {
-        return carRepository.findAll(specification);
+    public Page<Car> getCarsBySpecification(Specification<Car> specification, Pageable pageable) {
+        return carRepository.findAll(specification, pageable);
     }
 
     private Car getInitializedCar(CarDto dto) {

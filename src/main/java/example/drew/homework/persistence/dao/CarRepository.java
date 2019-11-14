@@ -25,7 +25,7 @@ public interface CarRepository extends JpaRepository<Car, Long>, JpaSpecificatio
 
     List<Car> findCarsByPerson_Username(String username);
 
-    @Query("select c from Car c order by c.createdAT desc")
-    List<Car> findCarsOrderByCreatedAT();
+    @Query("select c from Car c order by c.createdAt desc")
+    List<Car> findCarsOrderByCreatedAt();
 
 }

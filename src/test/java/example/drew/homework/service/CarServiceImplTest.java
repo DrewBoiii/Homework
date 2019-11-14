@@ -20,7 +20,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,7 +45,7 @@ public class CarServiceImplTest {
 
         this.expectedCar = Optional.of(car);
 
-        Mockito.when(carRepository.findCarsOrderByCreatedAT()).thenReturn(Collections.emptyList());
+        Mockito.when(carRepository.findCarsOrderByCreatedAt()).thenReturn(Collections.emptyList());
         Mockito.when(carRepository.findCarsBySearchCriteria("brand")).thenReturn(Collections.emptyList());
         Mockito.when(carRepository.findById(1L)).thenReturn(this.expectedCar);
 //        Mockito.when(carRepository.findById(111L)).thenThrow(new CarNotFoundException());
