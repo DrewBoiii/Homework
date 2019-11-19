@@ -72,7 +72,7 @@
                 <div th:if="${cars.isEmpty()}">
                     <div class="divider"></div>
                     <div class="section">
-                        <h4>There is no cars yet :(</h4>
+                        <h4>There is no cars that matches your search criteria</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -112,13 +112,44 @@
             </div>
             <div>
                 <ul class="pagination">
-                    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                    <li class="active"><a href="#!">1</a></li>
-                    <li class="waves-effect"><a href="#!">2</a></li>
-                    <li class="waves-effect"><a href="#!">3</a></li>
-                    <li class="waves-effect"><a href="#!">4</a></li>
-                    <li class="waves-effect"><a href="#!">5</a></li>
-                    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                    <th:block th:if="${active_page != 0}">
+                        <li th:if="${car_criteria.brand != null && car_criteria.model != null}">
+                            <a th:href="@{|/home?brand=${car_criteria.brand}&model=${car_criteria.model}&page=${active_page - 1}|}">
+                                <i class="material-icons">chevron_left</i>
+                            </a>
+                        </li>
+                        <li th:unless="${car_criteria.brand != null && car_criteria.model != null}">
+                            <a th:href="@{|/home?page=${active_page - 1}|}">
+                                <i class="material-icons">chevron_left</i>
+                            </a>
+                        </li>
+                    </th:block>
+                    <th:block th:each="page_number, iter : ${page_indexes}" th:with="
+                              left_terminator=${active_page > view_range/2 + 1 ? (active_page > page_indexes.size() - view_range/2 ? page_indexes.size() - view_range  : active_page - (view_range/2 + 1) ) : 0},
+                              right_terminator=${left_terminator + view_range + 1 }">
+                        <th:block th:if="${ left_terminator < iter.count && iter.count < right_terminator}">
+                            <li th:classappend="${active_page == page_number - 1} ? active : waves-effect ">
+                                <a th:if="${car_criteria.brand != null && car_criteria.model != null}"
+                                   th:href="@{|/home?brand=${car_criteria.brand}&model=${car_criteria.model}&page=${page_number - 1}|}"
+                                   th:text="${page_number}"></a>
+                                <a th:unless="${car_criteria.brand != null && car_criteria.model != null}"
+                                   th:href="@{|/home?page=${page_number - 1}|}"
+                                   th:text="${page_number}"></a>
+                            </li>
+                        </th:block>
+                    </th:block>
+                    <th:block th:if="${active_page < page_indexes.size() - 1}">
+                        <li th:if="${car_criteria.brand != null && car_criteria.model != null}">
+                            <a th:href="@{|/home?brand=${car_criteria.brand}&model=${car_criteria.model}&page=${active_page + 1}|}">
+                                <i class="material-icons">chevron_right</i>
+                            </a>
+                        </li>
+                        <li th:unless="${car_criteria.brand != null && car_criteria.model != null}">
+                            <a th:href="@{|/home?page=${active_page + 1}|}">
+                                <i class="material-icons">chevron_right</i>
+                            </a>
+                        </li>
+                    </th:block>
                 </ul>
             </div>
 <!--            <div>-->
