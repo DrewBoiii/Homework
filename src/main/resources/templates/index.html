@@ -87,21 +87,28 @@
                                     </div>
                                     <div class="card-content">
                                         <span class="card-title">
-                                            <span th:text="${car.brand} + ' ' + ${car.model} + ' ' + ${car.build.year}"
-                                                  class="card-title activator grey-text text-darken-4">Card Title
-                                                <i class="material-icons right">more_vert</i>
-                                            </span>
+                                            <div class="card-title activator grey-text text-darken-4">
+                                                <span th:text="${car.brand} + ' ' + ${car.model} + ' ' + ${car.build.year}">
+                                                    Card Title
+                                                </span>
+                                                <span>
+                                                    <i class="material-icons right">more_vert</i>
+                                                </span>
+                                            </div>
                                         </span>
-<!--                                        <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>-->
                                         <p th:text="${car.kilometers}">kilometers</p>
                                         <p th:text="${car.person.username}">person</p>
                                         <p th:text="${car.createdAt}">created at</p>
                                     </div>
                                     <div class="card-reveal">
-                                        <span th:text="${car.brand} + ' ' + ${car.model} + ' ' + ${car.build.year}"
-                                              class="card-title grey-text text-darken-4">Card Title
-                                            <i class="material-icons right">close</i>
-                                        </span>
+                                        <div class="card-title grey-text text-darken-4">
+                                            <span th:text="${car.brand} + ' ' + ${car.model} + ' ' + ${car.build.year}">
+                                                Card Title
+                                            </span>
+                                            <span>
+                                                <i class="material-icons right">close</i>
+                                            </span>
+                                        </div>
                                         <p th:text="${car.description}">description</p>
                                     </div>
                                 </div>
