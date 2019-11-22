@@ -12,42 +12,32 @@
 
 <main>
     <div id="loginResultDiv"></div>
-
     <div id="loginFormDiv" class="login-form">
         <form th:action="@{/login}" method="post" id="loginForm">
-
+            <h3>Login</h3>
             <div th:if="${param.error}" >
                 <div class="alert alert-danger">Invalid username or password.</div>
             </div>
-
             <div th:if="${param.logout}">
                 <div class="alert alert-info">You have been logged out.</div>
             </div>
-
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" name="username" class="form-control">
+                <input type="text" id="username" name="username" class="form-control" required minlength="2" maxlength="30">
             </div>
-
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" class="form-control">
+                <input type="password" id="password" name="password" class="form-control" required minlength="6" maxlength="20">
             </div>
-
             <div class="form-group">
                 <button type="submit" id="signinButton" class="btn btn-success btn-block">Sign in</button>
             </div>
         </form>
-
         <br/>
         <div>
-            <p class="text-center">New here? Click
-                <a th:href="@{/registration}" class="text-primary">this</a>
-                to sign up!</p>
+            <p class="text-center">New here? Click<a th:href="@{/registration}" class="text-primary">this</a>to sign up!</p>
         </div>
     </div>
-
 </main>
-
 </body>
 </html>

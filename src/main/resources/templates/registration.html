@@ -4,52 +4,48 @@
     <meta charset="UTF-8">
 
     <link th:href="@{/css/styles.css}" rel="stylesheet">
-
+    <link th:href="@{/css/login.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
     <!--<script src="https://code.jquery.com/jquery-3.4.1.js"-->
             <!--integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="-->
             <!--crossorigin="anonymous"></script>-->
     <!--<script th:src="@{js/saveUser.js}"></script>-->
-
     <title>Car Sales</title>
 </head>
 <body>
     <main>
         <!--<div id="registrationResultDiv"></div>-->
-
         <div th:if="${param.success}">
             <div class="alert alert-info">You've successfully registered!</div>
         </div>
-
         <div th:if="${param.error}">
             <div class="alert alert-danger">Please correct the form bellow.</div>
         </div>
-
-        <div id="registrationFormDiv">
+        <div id="registrationFormDiv" class="login-form">
             <form id="registrationForm" method="post" th:action="@{/registration}" th:object="${user}">
-                <div>
+                <h3>Registration</h3>
+                <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" id="username" th:field="*{username}">
+                    <input type="text" id="username" th:field="*{username}" class="form-control" required minlength="2" maxlength="30">
                 </div>
-
-                <div>
+                <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="text" id="email" th:field="*{email}">
+                    <input type="text" id="email" th:field="*{email}" class="form-control" required>
                 </div>
-
-                <div>
+                <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" th:field="*{password}">
+                    <input type="password" id="password" th:field="*{password}" class="form-control" required minlength="6" maxlength="20">
                 </div>
-
-                <div>
+                <div class="form-group">
                     <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" id="confirmPassword" th:field="*{confirmPassword}">
+                    <input type="password" id="confirmPassword" th:field="*{confirmPassword}" class="form-control" required minlength="6" maxlength="20">
                 </div>
-
-                <button type="submit" id="signupButton">Sign up</button>
+                <div class="form-group">
+                    <button type="submit" id="signupButton" class="btn btn-success btn-block">Sign up</button>
+                </div>
             </form>
         </div>
-
     </main>
 </body>
 </html>
