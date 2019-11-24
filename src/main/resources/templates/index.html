@@ -5,15 +5,15 @@
       layout:decorate="~{layout/layout}">
 <head>
     <meta charset="UTF-8">
-
     <link th:href="@{/css/styles.css}" rel="stylesheet">
-
-    <script src="https://code.jquery.com/jquery-3.4.1.js"
-            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-            crossorigin="anonymous"></script>
-<!--    <script th:src="@{js/getCars.js}"></script>-->
-    <script th:src="@{js/switchLang.js}"></script>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('select');
+            M.FormSelect.init(elems, options);
+        });
+    </script>
+<!--        <script th:src="@{js/getCars.js}"></script>-->
+<!--    <script th:src="@{js/switchLang.js}"></script>-->
     <title>Car Sales</title>
 </head>
 <body>
@@ -36,7 +36,7 @@
                 <div id="search_form" class="nav-wrapper">
                     <form th:action="@{/home}" method="get">
                         <div class="input-field">
-                            <input id="search" type="search" name="search" required>
+                            <input id="search" type="search" name="search">
                             <label class="label-icon" for="search">
                                 <i class="material-icons">search</i>
                             </label>
@@ -61,6 +61,14 @@
 <!--                            </select>-->
 <!--                            <label for="brand_select">Brands</label>-->
 <!--                        </div>-->
+                        <div class="input-field col s4">
+                            <select id="sort_select" th:field="*{sort}" style="display: block">
+                                <option value="createdAt" selected>Created at</option>
+                                <option value="kilometers">Kilometers</option>
+                                <option value="build">Build</option>
+                            </select>
+                            <label for="sort_select">Sort by</label>
+                        </div>
                         <div class="right-align">
                             <button type="submit" id="player-filter-btn" class="waves-effect waves-light btn">Filter</button>
                         </div>
@@ -121,12 +129,12 @@
                 <ul class="pagination">
                     <th:block th:if="${active_page != 0}">
                         <li th:if="${car_criteria.brand != null && car_criteria.model != null}">
-                            <a th:href="@{|/home?brand=${car_criteria.brand}&model=${car_criteria.model}&page=${active_page - 1}|}">
+                            <a th:href="@{|/home?brand=${car_criteria.brand}&model=${car_criteria.model}&page=${active_page - 1}&sort=${car_criteria.sort}|}">
                                 <i class="material-icons">chevron_left</i>
                             </a>
                         </li>
                         <li th:unless="${car_criteria.brand != null && car_criteria.model != null}">
-                            <a th:href="@{|/home?page=${active_page - 1}|}">
+                            <a th:href="@{|/home?page=${active_page - 1}&sort=${car_criteria.sort}|}">
                                 <i class="material-icons">chevron_left</i>
                             </a>
                         </li>
@@ -137,22 +145,22 @@
                         <th:block th:if="${ left_terminator < iter.count && iter.count < right_terminator}">
                             <li th:classappend="${active_page == page_number - 1} ? active : waves-effect ">
                                 <a th:if="${car_criteria.brand != null && car_criteria.model != null}"
-                                   th:href="@{|/home?brand=${car_criteria.brand}&model=${car_criteria.model}&page=${page_number - 1}|}"
+                                   th:href="@{|/home?brand=${car_criteria.brand}&model=${car_criteria.model}&page=${page_number - 1}&sort=${car_criteria.sort}|}"
                                    th:text="${page_number}"></a>
                                 <a th:unless="${car_criteria.brand != null && car_criteria.model != null}"
-                                   th:href="@{|/home?page=${page_number - 1}|}"
+                                   th:href="@{|/home?page=${page_number - 1}&sort=${car_criteria.sort}|}"
                                    th:text="${page_number}"></a>
                             </li>
                         </th:block>
                     </th:block>
                     <th:block th:if="${active_page < page_indexes.size() - 1}">
                         <li th:if="${car_criteria.brand != null && car_criteria.model != null}">
-                            <a th:href="@{|/home?brand=${car_criteria.brand}&model=${car_criteria.model}&page=${active_page + 1}|}">
+                            <a th:href="@{|/home?brand=${car_criteria.brand}&model=${car_criteria.model}&page=${active_page + 1}&sort=${car_criteria.sort}|}">
                                 <i class="material-icons">chevron_right</i>
                             </a>
                         </li>
                         <li th:unless="${car_criteria.brand != null && car_criteria.model != null}">
-                            <a th:href="@{|/home?page=${active_page + 1}|}">
+                            <a th:href="@{|/home?page=${active_page + 1}&sort=${car_criteria.sort}|}">
                                 <i class="material-icons">chevron_right</i>
                             </a>
                         </li>

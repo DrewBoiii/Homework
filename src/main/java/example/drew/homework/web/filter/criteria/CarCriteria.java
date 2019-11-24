@@ -9,8 +9,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CarCriteria {
 
+    public static final String DEFAULT_SORTING_CRITERIA = "createdAt";
+
     private String brand;
 
     private String model;
+
+    private String sort = DEFAULT_SORTING_CRITERIA;
 
 }

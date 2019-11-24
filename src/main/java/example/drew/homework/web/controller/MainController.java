@@ -53,19 +53,16 @@ public class MainController {
     }
 
     @GetMapping("/home")
-    public String getIndexPage(Model model,
-                               @ModelAttribute("car_criteria") CarCriteria carCriteria,
-                               @RequestParam(required = false) Optional<Integer> page) {
+    public String getIndexPage(Model model, @ModelAttribute("car_criteria") CarCriteria carCriteria, @RequestParam(required = false) Optional<Integer> page) {
         Specification<Car> carSpecification = new CarSpecification(carCriteria);
-        model.addAttribute("viewRange", MAX_INDEXES_RANGE_PER_PAGE);
-        Page<Car> carPages =  carService.getCarsBySpecification(carSpecification, PageRequest.of(page.orElse(0), MAX_ELEMENTS_PER_PAGE, Sort.by("createdAt").descending()));
+        Sort sort = Sort.by(carCriteria.getSort()).descending();
+        Page<Car> carPages =  carService.getCarsBySpecification(carSpecification, PageRequest.of(page.orElse(0), MAX_ELEMENTS_PER_PAGE, sort));
         int totalPages = carPages.getTotalPages();
         List<Integer> pageIndexes = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
         model.addAttribute("page_indexes", pageIndexes);
         model.addAttribute("active_page", page.orElse(0));
         model.addAttribute("view_range", MAX_INDEXES_RANGE_PER_PAGE);
         model.addAttribute("cars", carPages);
-
         return "index";
     }
 
