@@ -3,7 +3,9 @@ package example.drew.homework.web.controller;
 import example.drew.homework.exception.CarNotFoundException;
 import example.drew.homework.exception.UserNotFoundException;
 import example.drew.homework.persistence.model.Car;
+import example.drew.homework.persistence.model.Favorites;
 import example.drew.homework.service.CarService;
+import example.drew.homework.service.FavoritesService;
 import example.drew.homework.service.UserService;
 import example.drew.homework.web.dto.CarDto;
 import example.drew.homework.web.dto.UserDto;
@@ -35,11 +37,13 @@ public class MainController {
     private CarService carService;
     private UserService userService;
     private MessageSource messageSource;
+    private FavoritesService favoritesService;
 
-    public MainController(CarService carService, UserService userService, MessageSource messageSource) {
+    public MainController(CarService carService, UserService userService, MessageSource messageSource, FavoritesService favoritesService) {
         this.carService = carService;
         this.userService = userService;
         this.messageSource = messageSource;
+        this.favoritesService = favoritesService;
     }
 
     @GetMapping("/")
@@ -100,12 +104,32 @@ public class MainController {
     }
 
     @GetMapping("/cars/{car_id}/details")
-    public String getCarDetails(@PathVariable("car_id") Long id, Model model) throws CarNotFoundException {
+    public String getCarDetails(@PathVariable("car_id") Long id, Model model, @AuthenticationPrincipal User authenticatedUser) throws CarNotFoundException, UserNotFoundException {
+        Optional<example.drew.homework.persistence.model.User> person = userService.findUserByUsername(authenticatedUser.getUsername());
         Optional<Car> car = carService.getCarById(id);
-
         car.ifPresent(car1 -> model.addAttribute("car", car1));
-
+        boolean isAdded = favoritesService.findByPersonAndCar(person.orElse(new example.drew.homework.persistence.model.User()), car.orElse(new Car())).isPresent();
+        model.addAttribute("isAdded", isAdded);
         return "details";
+    }
+
+    @PostMapping("/cars/{car_id}/details/add")
+    public String addCarToFavorites(@PathVariable("car_id") Long id, Model model, @AuthenticationPrincipal User authenticatedUser) throws UserNotFoundException, CarNotFoundException {
+        Optional<example.drew.homework.persistence.model.User> person = userService.findUserByUsername(authenticatedUser.getUsername());
+        Optional<Car> car = carService.getCarById(id);
+        Favorites favorites = new Favorites();
+        person.ifPresent(favorites::setPerson);
+        car.ifPresent(favorites::setCar);
+        favoritesService.save(favorites);
+        return "redirect:/cars/{car_id}/details";
+    }
+
+    @PostMapping("/cars/{car_id}/details/remove")
+    public String removeCarFromFavorites(@PathVariable("car_id") Long id, Model model, @AuthenticationPrincipal User authenticatedUser) throws UserNotFoundException, CarNotFoundException {
+        Optional<example.drew.homework.persistence.model.User> person = userService.findUserByUsername(authenticatedUser.getUsername());
+        Optional<Car> car = carService.getCarById(id);
+        favoritesService.deleteByPersonAndCar(person.orElse(new example.drew.homework.persistence.model.User()), car.orElse(new Car()));
+        return "redirect:/cars/{car_id}/details";
     }
 
     @GetMapping("/cars/{car_id}/editor")
