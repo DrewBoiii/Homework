@@ -44,4 +44,18 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="14" author="DrewBoiii">
+        <createTable tableName="favorites">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="car_id" type="BIGINT">
+                <constraints referencedTableName="car"/>
+            </column>
+            <column name="person_id" type="BIGINT">
+                <constraints referencedTableName="person"/>
+            </column>
+        </createTable>
+    </changeSet>
+
 </databaseChangeLog>

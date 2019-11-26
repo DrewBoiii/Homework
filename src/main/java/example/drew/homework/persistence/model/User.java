@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -47,6 +48,9 @@ public class User implements UserDetails {
             )
     )
     private Set<Role> roles;
+
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    private List<Favorites> favorites;
 
     @PrePersist
     void createdAt(){
