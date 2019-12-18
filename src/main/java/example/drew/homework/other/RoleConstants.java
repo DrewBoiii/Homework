@@ -1,4 +1,4 @@
-package example.drew.homework.util;
+package example.drew.homework.other;
 
 public abstract class RoleConstants {
 

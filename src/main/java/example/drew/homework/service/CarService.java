@@ -2,7 +2,7 @@ package example.drew.homework.service;
 
 import example.drew.homework.exception.CarNotFoundException;
 import example.drew.homework.persistence.model.Car;
-import example.drew.homework.util.RoleConstants;
+import example.drew.homework.other.RoleConstants;
 import example.drew.homework.web.dto.CarDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -7,7 +7,7 @@ import example.drew.homework.persistence.dao.UserRepository;
 import example.drew.homework.persistence.model.Role;
 import example.drew.homework.persistence.model.User;
 import example.drew.homework.service.impl.UserServiceImpl;
-import example.drew.homework.util.RoleConstants;
+import example.drew.homework.other.RoleConstants;
 import example.drew.homework.web.dto.UserDto;
 import org.junit.After;
 import org.junit.Assert;

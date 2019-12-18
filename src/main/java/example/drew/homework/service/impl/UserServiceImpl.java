@@ -7,7 +7,7 @@ import example.drew.homework.persistence.dao.UserRepository;
 import example.drew.homework.persistence.model.Role;
 import example.drew.homework.persistence.model.User;
 import example.drew.homework.service.UserService;
-import example.drew.homework.util.RoleConstants;
+import example.drew.homework.other.RoleConstants;
 import example.drew.homework.web.dto.UserDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
