@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,10 +25,11 @@ public interface CarService {
 
     void saveCar(CarDto car);
 
-    @Secured(RoleConstants.ROLE_MODERATOR)
+    @Transactional
+    @Secured({RoleConstants.ROLE_MODERATOR, RoleConstants.ROLE_ADMIN})
     void deleteCarById(Long id);
 
-    @Secured(RoleConstants.ROLE_MODERATOR)
+    @Secured({RoleConstants.ROLE_MODERATOR, RoleConstants.ROLE_ADMIN})
     void updateCar(CarDto car);
 
 }

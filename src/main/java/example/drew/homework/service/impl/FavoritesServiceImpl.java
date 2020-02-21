@@ -23,9 +23,8 @@ public class FavoritesServiceImpl implements FavoritesService {
         favoritesRepository.save(favorites);
     }
 
-    @Override
-    public void deleteByPersonAndCar(User person, Car car) {
-        favoritesRepository.deleteByPersonAndCar(person, car);
+    public void deleteByPerson_IdAndCar_Id(Long personId, Long carId) {
+        favoritesRepository.deleteByPerson_IdAndCar_Id(personId, carId);
     }
 
     @Override

@@ -12,7 +12,7 @@ public interface FavoritesService {
     void save(Favorites favorites);
 
     @Transactional
-    void deleteByPersonAndCar(User person, Car car);
+    void deleteByPerson_IdAndCar_Id(Long personId, Long carId);
 
     Optional<Favorites> findByPersonAndCar(User person, Car car);
 

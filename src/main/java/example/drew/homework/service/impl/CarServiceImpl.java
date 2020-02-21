@@ -2,11 +2,11 @@ package example.drew.homework.service.impl;
 
 import example.drew.homework.exception.CarNotFoundException;
 import example.drew.homework.persistence.dao.CarRepository;
+import example.drew.homework.persistence.dao.FavoritesRepository;
 import example.drew.homework.persistence.model.Car;
 import example.drew.homework.service.CarService;
 import example.drew.homework.web.dto.CarDto;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -19,10 +19,11 @@ import java.util.*;
 public class CarServiceImpl implements CarService {
 
     private CarRepository carRepository;
+    private FavoritesRepository favoritesRepository;
 
-    @Autowired
-    public CarServiceImpl(CarRepository carRepository) {
+    public CarServiceImpl(CarRepository carRepository, FavoritesRepository favoritesRepository) {
         this.carRepository = carRepository;
+        this.favoritesRepository = favoritesRepository;
     }
 
     @Override
@@ -57,14 +58,12 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void deleteCarById(Long id) {
-        Optional<Car> removedCar = carRepository.findById(id);
+        Car carToRemove = carRepository.findById(id).orElse(new Car());
 
-        if (removedCar.isPresent()) {
+        log.info("Removed car is " + carToRemove);
 
-            log.info("Removed car is " + removedCar.get().toString());
-
-            carRepository.delete(removedCar.get());
-        }
+        carRepository.delete(carToRemove);
+        favoritesRepository.deleteByPerson_IdAndCar_Id(carToRemove.getPerson().getId(), carToRemove.getId());
     }
 
     @Override

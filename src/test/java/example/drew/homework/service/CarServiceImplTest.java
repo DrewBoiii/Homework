@@ -31,7 +31,7 @@ public class CarServiceImplTest {
     private CarRepository carRepository;
 
     @InjectMocks
-    private CarService carService = new CarServiceImpl(carRepository);
+    private CarService carService = new CarServiceImpl(carRepository, null);
 
     private Optional<Car> expectedCar;
 

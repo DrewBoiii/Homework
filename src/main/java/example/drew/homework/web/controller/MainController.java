@@ -128,7 +128,7 @@ public class MainController {
     public String removeCarFromFavorites(@PathVariable("car_id") Long id, Model model, @AuthenticationPrincipal User authenticatedUser) throws UserNotFoundException, CarNotFoundException {
         Optional<example.drew.homework.persistence.model.User> person = userService.findUserByUsername(authenticatedUser.getUsername());
         Optional<Car> car = carService.getCarById(id);
-        favoritesService.deleteByPersonAndCar(person.orElse(new example.drew.homework.persistence.model.User()), car.orElse(new Car()));
+        favoritesService.deleteByPerson_IdAndCar_Id(person.get().getId(), car.get().getId());
         return "redirect:/cars/{car_id}/details";
     }
 
