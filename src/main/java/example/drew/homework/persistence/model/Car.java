@@ -10,8 +10,6 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Car {
@@ -40,9 +38,6 @@ public class Car {
 
     @Column
     private LocalDate createdAt;
-
-    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
-    private List<Favorites> favorites;
 
     @PrePersist
     void createdAt(){

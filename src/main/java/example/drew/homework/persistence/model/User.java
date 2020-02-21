@@ -13,8 +13,6 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
 @Entity
 @Table(name = "person")
 public class User implements UserDetails {
@@ -48,9 +46,6 @@ public class User implements UserDetails {
             )
     )
     private Set<Role> roles;
-
-    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
-    private List<Favorites> favorites;
 
     @PrePersist
     void createdAt(){
