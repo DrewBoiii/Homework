@@ -1,6 +1,7 @@
 package example.drew.homework.web.controller;
 
 import example.drew.homework.service.UserService;
+import example.drew.homework.web.api.UserRestController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,13 +22,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class UserControllerTest {
+public class UserRestControllerTest {
 
     @Mock
     private UserService userService;
 
     @InjectMocks
-    private UserController userController;
+    private UserRestController userRestController;
 
     @Autowired
     private MockMvc mockMvc;
@@ -36,7 +37,7 @@ public class UserControllerTest {
     public void init() {
         MockitoAnnotations.initMocks(this);
 
-        mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(userRestController).build();
     }
 
     @Test

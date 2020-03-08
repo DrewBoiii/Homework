@@ -11,6 +11,7 @@ public interface UserService {
 
     Optional<User> save(UserDto userDto) throws RoleNotFoundException;
 
-    Optional<User> findUserByUsername(String username) throws UserNotFoundException;
+    User getUserByUsername(String username) throws UserNotFoundException;
+    User getUserByEmail(String email) throws UserNotFoundException;
 
 }

@@ -94,7 +94,7 @@ public class UserServiceImplTest {
     public void getOptionalUser_whenPassingArgUsername_returnNotEmptyOptional() throws UserNotFoundException {
         String username = "goyko";
 
-        Optional<User> actualUser = userService.findUserByUsername(username);
+        Optional<User> actualUser = Optional.of(userService.getUserByUsername(username));
 
         Assert.assertNotNull(actualUser);
 

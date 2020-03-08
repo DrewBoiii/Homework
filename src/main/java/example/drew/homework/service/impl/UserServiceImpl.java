@@ -49,12 +49,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findUserByUsername(String username) throws UserNotFoundException {
-        Optional<User> user = userRepository.findUserByUsername(username);
+    public User getUserByUsername(String username) {
+        User user = userRepository.findUserByUsername(username).orElse(null);
+        log.info("Extracted user " + user);
+        return user;
+    }
 
-        user.ifPresent(user1 -> log.info("Extracted user is " + user1.toString()));
-
-        return Optional.of(user.orElseThrow(UserNotFoundException::new));
+    @Override
+    public User getUserByEmail(String email) {
+        User user = userRepository.findUserByEmail(email).orElse(null);
+        log.info("Extracted user " + user);
+        return user;
     }
 
     private User getInitializedUser(UserDto dto){

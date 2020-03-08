@@ -30,7 +30,7 @@ import java.util.Objects;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class CarControllerTest {
+public class CarRestControllerTest {
 
 //    @Mock
 //    private UserService userService;

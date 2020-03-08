@@ -1,6 +1,7 @@
 package example.drew.homework.web.controller;
 
 import example.drew.homework.exception.CarNotFoundException;
+import example.drew.homework.exception.RoleNotFoundException;
 import example.drew.homework.exception.UserNotFoundException;
 import example.drew.homework.persistence.model.Car;
 import example.drew.homework.persistence.model.Favorites;
@@ -16,12 +17,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -70,33 +74,6 @@ public class MainController {
         return "index";
     }
 
-    // TODO: 11/4/2019 temporary
-    @GetMapping("/message")
-    public String message(Model model, @AuthenticationPrincipal User user) throws UserNotFoundException {
-        Optional<example.drew.homework.persistence.model.User> person = Optional.empty();
-
-        if (user != null) {
-            person = userService.findUserByUsername(user.getUsername());
-        }
-
-        String name = "Anonymous";
-
-        if (person.isPresent()) {
-            name = person.get().getUsername();
-        }
-
-        model.addAttribute(
-                "name",
-                messageSource.getMessage(
-                        "greeting.user",
-                        new String[]{name},
-                        new Locale("ru", "RU")
-                )
-        );
-
-        return "index";
-    }
-
     @GetMapping("/cars")
     public String getCarsPage(Model model, @AuthenticationPrincipal User user) {
         model.addAttribute("cars", carService.getCarsByUsername(user.getUsername()));
@@ -105,7 +82,7 @@ public class MainController {
 
     @GetMapping("/cars/{car_id}/details")
     public String getCarDetails(@PathVariable("car_id") Long id, Model model, @AuthenticationPrincipal User authenticatedUser) throws CarNotFoundException, UserNotFoundException {
-        Optional<example.drew.homework.persistence.model.User> person = userService.findUserByUsername(authenticatedUser.getUsername());
+        Optional<example.drew.homework.persistence.model.User> person = Optional.of(userService.getUserByUsername(authenticatedUser.getUsername()));
         Optional<Car> car = carService.getCarById(id);
         car.ifPresent(car1 -> model.addAttribute("car", car1));
         boolean isAdded = favoritesService.findByPersonAndCar(person.orElse(new example.drew.homework.persistence.model.User()), car.orElse(new Car())).isPresent();
@@ -115,7 +92,7 @@ public class MainController {
 
     @PostMapping("/cars/{car_id}/details/add")
     public String addCarToFavorites(@PathVariable("car_id") Long id, Model model, @AuthenticationPrincipal User authenticatedUser) throws UserNotFoundException, CarNotFoundException {
-        Optional<example.drew.homework.persistence.model.User> person = userService.findUserByUsername(authenticatedUser.getUsername());
+        Optional<example.drew.homework.persistence.model.User> person = Optional.of(userService.getUserByUsername(authenticatedUser.getUsername()));
         Optional<Car> car = carService.getCarById(id);
         Favorites favorites = new Favorites();
         person.ifPresent(favorites::setPerson);
@@ -126,7 +103,7 @@ public class MainController {
 
     @PostMapping("/cars/{car_id}/details/remove")
     public String removeCarFromFavorites(@PathVariable("car_id") Long id, Model model, @AuthenticationPrincipal User authenticatedUser) throws UserNotFoundException, CarNotFoundException {
-        Optional<example.drew.homework.persistence.model.User> person = userService.findUserByUsername(authenticatedUser.getUsername());
+        Optional<example.drew.homework.persistence.model.User> person = Optional.of(userService.getUserByUsername(authenticatedUser.getUsername()));
         Optional<Car> car = carService.getCarById(id);
         favoritesService.deleteByPerson_IdAndCar_Id(person.get().getId(), car.get().getId());
         return "redirect:/cars/{car_id}/details";
@@ -156,6 +133,31 @@ public class MainController {
     @GetMapping("/registration")
     public String getRegistrationForm() {
         return "registration";
+    }
+
+    @PostMapping("/registration")
+    public String saveUser(@Valid @ModelAttribute("user") UserDto userDto, Errors errors) throws RoleNotFoundException, UserNotFoundException {
+        example.drew.homework.persistence.model.User userByEmail = userService.getUserByEmail(userDto.getEmail());
+        if (userByEmail != null) {
+            errors.rejectValue(
+                    "email",
+                    HttpStatus.BAD_REQUEST.toString(),
+                    "There is already an account registered with that email"
+            );
+        }
+        example.drew.homework.persistence.model.User userByUsername = userService.getUserByUsername(userDto.getUsername());
+        if (userByUsername != null) {
+            errors.rejectValue(
+                    "username",
+                    HttpStatus.BAD_REQUEST.toString(),
+                    "There is already an account registered with that username"
+            );
+        }
+        if (errors.hasErrors()) {
+            return "registration";
+        }
+        userService.save(userDto);
+        return "redirect:/login";
     }
 
     @GetMapping("/login")
