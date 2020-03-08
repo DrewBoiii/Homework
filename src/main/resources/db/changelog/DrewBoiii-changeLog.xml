@@ -14,14 +14,14 @@
         <insert tableName="person">
             <column name="id" value="1"/>
             <column name="username" value="admin"/>
-            <column name="password" value="$2a$10$r0mYPz82odrSFM6KyovBs.5fqsY9gq3TsI8GgjptfaDK3lVpMJvZu"/>
+            <column name="password" value="$2a$10$2WMSAbdcEGV.hHfEBYSEIOJlBey54ygk5rW7F02cDoUQmmM1X/CYa"/>
             <column name="email" value="admin@mail.ru"/>
             <column name="created_at" value="2019-11-10"/>
         </insert>
         <insert tableName="person">
             <column name="id" value="2"/>
             <column name="username" value="moderator"/>
-            <column name="password" value="$2a$10$r0mYPz82odrSFM6KyovBs.5fqsY9gq3TsI8GgjptfaDK3lVpMJvZu"/>
+            <column name="password" value="$2a$10$2WMSAbdcEGV.hHfEBYSEIOJlBey54ygk5rW7F02cDoUQmmM1X/CYa"/>
             <column name="email" value="moderator@mail.ru"/>
             <column name="created_at" value="2019-11-10"/>
         </insert>

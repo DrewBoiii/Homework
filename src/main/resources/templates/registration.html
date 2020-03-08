@@ -27,25 +27,57 @@
                 <h3>Registration</h3>
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" id="username" th:field="*{username}" class="form-control" required minlength="2" maxlength="30">
+                    <input type="text" id="username" class="form-control" th:field="*{username}"
+                           title="username should be at least 4 characters long"
+                           required minlength="4" maxlength="30">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="text" id="email" th:field="*{email}" class="form-control" required>
+                    <input type="email" id="email" class="form-control"
+                           th:field="*{email}"
+                           required>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" th:field="*{password}" class="form-control" required minlength="6" maxlength="20">
+                    <input type="password" id="password" class="form-control"
+                           th:field="*{password}"
+                           title="The password should have at least one upper case, one lower case, one special char
+                           and length should be 10 characters long"
+                           required pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*?[#?!@$%^&*-]).{10,128}$">
                 </div>
                 <div class="form-group">
                     <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" id="confirmPassword" th:field="*{confirmPassword}" class="form-control" required minlength="6" maxlength="20">
+                    <input type="password" id="confirmPassword" class="form-control"
+                           th:field="*{confirmPassword}"
+                           title="The password should have at least one upper case, one lower case, one special char
+                           and length should be 10 characters long"
+                           required pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*?[#?!@$%^&*-]).{10,128}$">
                 </div>
                 <div class="form-group">
                     <button type="submit" id="signupButton" class="btn btn-success btn-block">Sign up</button>
                 </div>
             </form>
+            <br>
+            <div>
+                <p class="text-center"><a th:href="@{/login}" class="text-primary">Already have an account? Sign In.</a></p>
+            </div>
         </div>
     </main>
+    <script>
+        let password = document.getElementById("password");
+        let confirm_password = document.getElementById("confirmPassword");
+
+        function validatePassword(){
+            if(password.value !== confirm_password.value) {
+                confirm_password.setCustomValidity("passwords don't match");
+            }
+            else {
+                confirm_password.setCustomValidity('');
+            }
+        }
+
+        password.onchange = validatePassword;
+        confirm_password.onkeyup = validatePassword;
+    </script>
 </body>
 </html>
